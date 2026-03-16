@@ -36,14 +36,14 @@ int ucln(int a, int b) { // hàm tìm ước chung lớn nhất của tử và m
     if(b == 0) return a;
     return ucln(b, a%b);
 }
-void RutGon(PhanSo &p) { // hàm thực hiện rút gọn phân số
-    int tuso = abs(p.tuso); // chuyển số âm thành dương
-    int mauso = abs(p.mauso); // chuyển số âm thành dương
+void RutGon(int &tuso, int &mauso) { // hàm thực hiện rút gọn phân số
+    tuso = abs(tuso); // chuyển số âm thành dương
+    mauso = abs(mauso); // chuyển số âm thành dương
     int uocChung = ucln(tuso, mauso); // tìm ước chung
-    p.tuso/=uocChung; // thực hiện chia tử cho ước chung tìm được ở trên để rút gọn
-    p.mauso/=uocChung; // thực hiện chia mẫu cho ước chung tìm được ở trên để rút gọn
+    tuso/=uocChung; // thực hiện chia tử cho ước chung tìm được ở trên để rút gọn
+    mauso/=uocChung; // thực hiện chia mẫu cho ước chung tìm được ở trên để rút gọn
 }
-void XuatPhanSo(int tuso, int mauso) {
+void XuatPhanSo(int tuso, int mauso) { // hàm xuất phân số
     if(tuso == 0) { // kiểm tra xem tử có phải là số 0 không nếu là số 0 thì xuất 0 ngay lập tức
         cout << 0 << endl;
         return;
@@ -60,43 +60,35 @@ void XuatPhanSo(int tuso, int mauso) {
         cout << tuso << '/' << mauso <<endl;
     }   
 }
-void Tong(PhanSo p1, PhanSo p2) {
+void Tong(PhanSo p1, PhanSo p2) { // hàm tính tổng 2 phân số
     cout << "Tong hai phan so la: ";
     int tuso = p1.tuso*p2.mauso + p1.mauso*p2.tuso;
     int mauso = p1.mauso*p2.mauso;
-    int uocChung = ucln(tuso, mauso);
-    tuso /= uocChung;
-    mauso /= uocChung;
+    RutGon(tuso, mauso);
     XuatPhanSo(tuso, mauso);
 }
-void Hieu(PhanSo p1, PhanSo p2) {
+void Hieu(PhanSo p1, PhanSo p2) { // hàm tính hiệu 2 phân số
     cout << "Hieu hai phan so la: ";
     int tuso = p1.tuso*p2.mauso - p1.mauso*p2.tuso;
     int mauso = p1.mauso*p2.mauso;
-    int uocChung = ucln(tuso, mauso);
-    tuso /= uocChung;
-    mauso /= uocChung;
+    RutGon(tuso, mauso);
     XuatPhanSo(tuso, mauso);
 }
-void Tich(PhanSo p1, PhanSo p2) {
+void Tich(PhanSo p1, PhanSo p2) { // hàm tính tích 2 phân số
     cout << "Tich hai phan so la: ";
     int tuso = p1.tuso*p2.tuso;
     int mauso = p1.mauso*p2.mauso;
-    int uocChung = ucln(tuso, mauso);
-    tuso /= uocChung;
-    mauso /= uocChung;
+    RutGon(tuso, mauso);
     XuatPhanSo(tuso, mauso);
 }
-void Thuong(PhanSo p1, PhanSo p2) {
+void Thuong(PhanSo p1, PhanSo p2) { // hàm tính thương 2 phân số
     cout << "Thuong hai phan so la: ";
     int tuso = p1.tuso*p2.mauso;
     int mauso = p1.mauso*p2.tuso;
-    int uocChung = ucln(tuso, mauso);
-    tuso /= uocChung;
-    mauso /= uocChung;
+    RutGon(tuso, mauso);
     XuatPhanSo(tuso, mauso);
 }
-void TinhToan(PhanSo p1, PhanSo p2) { // hàm xuất phân số
+void TinhToan(PhanSo p1, PhanSo p2) { // hàm tính toán
     Tong(p1, p2);
     Hieu(p1, p2);
     Tich(p1, p2);
