@@ -1,6 +1,12 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
+
+/*
+ * Hàm KiemTra: Kiểm tra và nhập một số thực từ người dùng.
+ * Đầu vào: Không có tham số đầu vào. Hàm sẽ yêu cầu người dùng nhập từ bàn phím.
+ * Đầu ra: Trả về một số thực hợp lệ.
+ */
 double KiemTra() { // hàm kiểm tra điều kiện đầu vào có phải là số nguyên không, nếu không phải là số nguyên thì nhập lại
     double n;
     while(true) {
@@ -18,6 +24,12 @@ double KiemTra() { // hàm kiểm tra điều kiện đầu vào có phải là 
     // trả về số nguyên hợp lệ
     return n;
 }
+
+/*
+ * Hàm tinhSin: Tính giá trị sin(x) bằng cách sử dụng chuỗi Taylor với độ chính xác 0.00001.
+ * Đầu vào: Một số thực x (góc tính bằng radian).
+ * Đầu ra: Trả về giá trị sin(x) dưới dạng double.
+ */
 double tinhSin(double x) { // hàm tính sin(x)
     double sum = x; // giá trị sin(x) sẽ được trả về
     double soHang = x;  // đây là giá trị để so sánh với độ chính xác để biết khi nào dừng vòng lặp
@@ -29,6 +41,12 @@ double tinhSin(double x) { // hàm tính sin(x)
     }
     return sum; // trả về sum tức sin(x) cần tìm
 }
+
+/*
+ * Hàm main: Hàm chính của chương trình, nhập giá trị x và tính sin(x).
+ * Đầu vào: Không có tham số.
+ * Đầu ra: Trả về 0 khi chương trình kết thúc thành công.
+ */
 int main() {
     double x;
     cout << "Nhap gia tri cua x: ";
