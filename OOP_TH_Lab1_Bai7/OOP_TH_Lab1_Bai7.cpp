@@ -2,15 +2,18 @@
 #include <string>
 
 using namespace std;
+
 struct Date {
     int ngay;
     int thang;
     int nam;
 };
+
 struct Time {
     int gio;
     int phut;
 };
+
 struct ChuyenBay {
     string maCB;
     Date ngayBay;
@@ -18,7 +21,13 @@ struct ChuyenBay {
     string noiDi;
     string noiDen;
 };
-bool isAlphaNum(string s) { // hàm kiểm tra sự hợp lệ của mã số chuyến bay
+
+/*
+ * Hàm isAlphaNum: Kiểm tra tính hợp lệ của mã số chuyến bay.
+ * Đầu vào: Chuỗi s (Mã chuyến bay cần kiểm tra).
+ * Đầu ra: Trả về true nếu độ dài từ 1-5 và chỉ chứa chữ cái hoặc số, ngược lại trả về false.
+ */
+bool isAlphaNum(string s) { 
     if (s.length() == 0 || s.length() > 5) return false;
     for (int i = 0; i < s.length(); i++) {
         char c = s[i];
@@ -28,7 +37,13 @@ bool isAlphaNum(string s) { // hàm kiểm tra sự hợp lệ của mã số ch
     }
     return true;
 }
-bool isLocation(string s) { // hàm kiểm tra sự hợp lệ của tên địa điểm
+
+/*
+ * Hàm isLocation: Kiểm tra tính hợp lệ của tên địa điểm.
+ * Đầu vào: Chuỗi s (Tên địa điểm cần kiểm tra).
+ * Đầu ra: Trả về true nếu độ dài từ 1-20 và chỉ chứa chữ cái hoặc khoảng trắng, ngược lại trả về false.
+ */
+bool isLocation(string s) { 
     if (s.length() == 0 || s.length() > 20) return false;
     for (int i = 0; i < s.length(); i++) {
         char c = s[i];
@@ -38,25 +53,55 @@ bool isLocation(string s) { // hàm kiểm tra sự hợp lệ của tên địa
     }
     return true;
 }
-bool namNhuan(int nam) {    // hàm kiểm tra năm nhuận
+
+/*
+ * Hàm namNhuan: Kiểm tra một năm cụ thể có phải là năm nhuận hay không.
+ * Đầu vào: Số nguyên nam (Năm cần kiểm tra).
+ * Đầu ra: Trả về true nếu là năm nhuận, ngược lại trả về false.
+ */
+bool namNhuan(int nam) {    
     return (nam % 400 == 0) || (nam % 4 == 0 && nam % 100 != 0);
 }
-int soNgayTrongThang(int thang, int nam) { // hàm tính số ngày trong tháng
+
+/*
+ * Hàm soNgayTrongThang: Tính toán số lượng ngày tối đa của một tháng trong năm.
+ * Đầu vào: Hai số nguyên thang và nam.
+ * Đầu ra: Trả về số nguyên là số ngày của tháng đó (28, 29, 30 hoặc 31).
+ */
+int soNgayTrongThang(int thang, int nam) { 
     switch (thang) {
         case 4: case 6: case 9: case 11: return 30;
         case 2: return namNhuan(nam) ? 29 : 28;
         default: return 31;
     }
 }
-bool kiemTraNgay(Date d) { // hàm kiểm tra tính hợp lệ của ngày tháng
+
+/*
+ * Hàm kiemTraNgay: Xác thực dữ liệu ngày tháng năm có tồn tại trên thực tế không.
+ * Đầu vào: Biến d thuộc kiểu cấu trúc Date.
+ * Đầu ra: Trả về true nếu ngày tháng năm hợp lý, ngược lại trả về false.
+ */
+bool kiemTraNgay(Date d) { 
     if (d.nam < 1 || d.thang < 1 || d.thang > 12 || d.ngay < 1) return false;
     if (d.ngay > soNgayTrongThang(d.thang, d.nam)) return false;
     return true;
 }
-bool kiemTraGio(Time t) { // hàm kiểm tra tính hợp lệ của giờ
+
+/*
+ * Hàm kiemTraGio: Xác thực dữ liệu giờ phút có đúng định dạng 24h không.
+ * Đầu vào: Biến t thuộc kiểu cấu trúc Time.
+ * Đầu ra: Trả về true nếu giờ (0-23) và phút (0-59) hợp lệ, ngược lại trả về false.
+ */
+bool kiemTraGio(Time t) { 
     return (t.gio >= 0 && t.gio <= 23 && t.phut >= 0 && t.phut <= 59);
 }
-void nhap1CB(ChuyenBay &cb) { // hàm nhập 1 chuyến bay
+
+/*
+ * Hàm nhap1CB: Thực hiện nhập liệu và kiểm tra tính hợp lệ cho một chuyến bay.
+ * Đầu vào: Biến tham chiếu cb kiểu ChuyenBay. Dữ liệu thực tế được lấy từ bàn phím.
+ * Đầu ra: Không có giá trị trả về (void). Biến cb sẽ chứa dữ liệu chuyến bay hoàn chỉnh và hợp lệ.
+ */
+void nhap1CB(ChuyenBay &cb) { 
     while (true) {
         cout << "Nhap ma chuyen bay: ";
         getline(cin, cb.maCB);
@@ -89,14 +134,25 @@ void nhap1CB(ChuyenBay &cb) { // hàm nhập 1 chuyến bay
         cout << "Loi: Noi den toi da 20 ky tu, khong chua so/ky tu dac biet.\n";
     }
 }
-void xuat1CB(ChuyenBay cb) { // hàm xuất 1 chuyến bay
+
+/*
+ * Hàm xuat1CB: In thông tin chi tiết của một chuyến bay ra màn hình.
+ * Đầu vào: Biến cb kiểu ChuyenBay chứa dữ liệu cần in.
+ * Đầu ra: Không có giá trị trả về (void). Xuất chuỗi thông tin ra console.
+ */
+void xuat1CB(ChuyenBay cb) { 
     cout << "Ma: " << cb.maCB 
          << " | Ngay: " << cb.ngayBay.ngay << "/" << cb.ngayBay.thang << "/" << cb.ngayBay.nam
          << " | Gio: " << cb.gioBay.gio << ":" << cb.gioBay.phut
          << " | Tu: " << cb.noiDi << " -> Den: " << cb.noiDen << "\n";
 }
 
-void nhapDS(ChuyenBay* &ds, int &n) { // hàm nhập danh sách chuyến bay
+/*
+ * Hàm nhapDS: Khởi tạo mảng động và nhập dữ liệu cho danh sách nhiều chuyến bay.
+ * Đầu vào: Con trỏ ds (quản lý mảng) và số nguyên n (số lượng chuyến bay) truyền dạng tham chiếu.
+ * Đầu ra: Không có giá trị trả về (void). Cấp phát bộ nhớ cho mảng ds và lưu toàn bộ dữ liệu người dùng nhập.
+ */
+void nhapDS(ChuyenBay* &ds, int &n) { 
     cout << "Nhap so luong chuyen bay: ";
     while(cin >> n) {
         if(n < 0) {
@@ -112,13 +168,23 @@ void nhapDS(ChuyenBay* &ds, int &n) { // hàm nhập danh sách chuyến bay
     }
 }
 
-void xuatDS(ChuyenBay* ds, int n) { // hàm xuất danh sách chuyến bay
+/*
+ * Hàm xuatDS: In toàn bộ danh sách các chuyến bay hiện có.
+ * Đầu vào: Con trỏ ds (chứa mảng chuyến bay) và số nguyên n (số lượng phần tử).
+ * Đầu ra: Không có giá trị trả về (void). Gọi hàm xuat1CB lặp lại n lần.
+ */
+void xuatDS(ChuyenBay* ds, int n) { 
     for (int i = 0; i < n; i++) {
         xuat1CB(ds[i]);
     }
 }
 
-void timKiem(ChuyenBay* ds, int n, string key, int type) { // hàm tìm kiếm chuyến bay
+/*
+ * Hàm timKiem: Quét mảng để tìm và in các chuyến bay khớp với từ khóa.
+ * Đầu vào: Mảng ds, số lượng n, từ khóa key (chuỗi), và type (1: theo mã, 2: theo nơi đi, 3: theo nơi đến).
+ * Đầu ra: Không có giá trị trả về (void). In ra các chuyến bay thỏa mãn điều kiện hoặc thông báo không tìm thấy.
+ */
+void timKiem(ChuyenBay* ds, int n, string key, int type) { 
     bool found = false;
     for (int i = 0; i < n; i++) {
         if ((type == 1 && ds[i].maCB == key) ||
@@ -131,15 +197,25 @@ void timKiem(ChuyenBay* ds, int n, string key, int type) { // hàm tìm kiếm c
     if (!found) cout << "Khong tim thay ket qua.\n";
 }
 
-int soSanhThoiGian(ChuyenBay a, ChuyenBay b) { // hàm so sánh thời gian để sắp xếp
-    // nếu thời gian a sau thời gian b thì trả về giá trị dương và đảo vị trí của 2 ngày
+/*
+ * Hàm soSanhThoiGian: So sánh mốc thời gian khởi hành giữa 2 chuyến bay.
+ * Đầu vào: Hai biến a và b kiểu ChuyenBay cần so sánh.
+ * Đầu ra: Trả về số > 0 nếu a bay sau b, số < 0 nếu a bay trước b, số 0 nếu cùng thời điểm.
+ */
+int soSanhThoiGian(ChuyenBay a, ChuyenBay b) { 
     if (a.ngayBay.nam != b.ngayBay.nam) return a.ngayBay.nam - b.ngayBay.nam;
     if (a.ngayBay.thang != b.ngayBay.thang) return a.ngayBay.thang - b.ngayBay.thang;
     if (a.ngayBay.ngay != b.ngayBay.ngay) return a.ngayBay.ngay - b.ngayBay.ngay;
     if (a.gioBay.gio != b.gioBay.gio) return a.gioBay.gio - b.gioBay.gio;
     return a.gioBay.phut - b.gioBay.phut;
 }
-void sapXep(ChuyenBay* ds, int n) { // hàm sắp xếp bubble sort
+
+/*
+ * Hàm sapXep: Sắp xếp danh sách chuyến bay theo thời gian tăng dần (từ sớm đến muộn).
+ * Đầu vào: Con trỏ ds (chứa mảng chuyến bay) và số nguyên n (số lượng phần tử).
+ * Đầu ra: Không có giá trị trả về (void). Các phần tử trong mảng ds bị thay đổi thứ tự.
+ */
+void sapXep(ChuyenBay* ds, int n) { 
     for (int i = 0; i < n - 1; i++) {
         for (int j = i + 1; j < n; j++) {
             if (soSanhThoiGian(ds[i], ds[j]) > 0) {
@@ -148,7 +224,13 @@ void sapXep(ChuyenBay* ds, int n) { // hàm sắp xếp bubble sort
         }
     }
 }
-void lietKeTheoNoiDiVaNgay(ChuyenBay* ds, int n, string noidi, Date ngay) { // tìm kiếm theo nơi đi và ngày 
+
+/*
+ * Hàm lietKeTheoNoiDiVaNgay: Tìm và in các chuyến bay khởi hành từ một địa điểm vào một ngày cụ thể.
+ * Đầu vào: Mảng ds, số lượng n, chuỗi noidi, và biến ngay kiểu Date.
+ * Đầu ra: Không có giá trị trả về (void). In kết quả ra màn hình hoặc báo lỗi nếu không có.
+ */
+void lietKeTheoNoiDiVaNgay(ChuyenBay* ds, int n, string noidi, Date ngay) { 
     bool found = false;
     for (int i = 0; i < n; i++) {
         if (ds[i].noiDi == noidi && 
@@ -161,7 +243,13 @@ void lietKeTheoNoiDiVaNgay(ChuyenBay* ds, int n, string noidi, Date ngay) { // t
     }
     if (!found) cout << "Khong co chuyen bay nao phu hop.\n";
 }
-int demChuyenBay(ChuyenBay* ds, int n, string noidi, string noiden) { // đếm chuyến bay có nơi đi và nơi đến
+
+/*
+ * Hàm demChuyenBay: Đếm số lượng chuyến bay có chung lộ trình (nơi đi - nơi đến).
+ * Đầu vào: Mảng ds, số lượng n, chuỗi noidi và chuỗi noiden.
+ * Đầu ra: Trả về số nguyên đại diện cho tổng số chuyến bay khớp với lộ trình.
+ */
+int demChuyenBay(ChuyenBay* ds, int n, string noidi, string noiden) { 
     int count = 0;
     for (int i = 0; i < n; i++) {
         if (ds[i].noiDi == noidi && ds[i].noiDen == noiden) {
