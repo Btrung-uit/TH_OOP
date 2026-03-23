@@ -8,7 +8,7 @@ using namespace std;
  * Đầu vào: Không có tham số đầu vào. Hàm sẽ yêu cầu người dùng nhập từ bàn phím.
  * Đầu ra: Trả về một số thực hợp lệ.
  */
-double KiemTra() { // hàm kiểm tra điều kiện đầu vào có phải là số nguyên không, nếu không phải là số nguyên thì nhập lại
+double KiemTra() { // hàm kiểm tra điều kiện đầu vào có phải là số thực không, nếu không phải là số nguyên thì nhập lại
     double n;
     while(true) {
         if(cin >> n) {
@@ -22,7 +22,7 @@ double KiemTra() { // hàm kiểm tra điều kiện đầu vào có phải là 
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // bỏ qua toàn bộ kí tự rác trong bộ nhớ đệm
         }
     }
-    // trả về số nguyên hợp lệ
+    // trả về số thực hợp lệ
     return n;
 }
 
