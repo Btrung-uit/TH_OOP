@@ -114,12 +114,16 @@ void find(int a, int b, int *arrA, int *arrB) { // hàm tìm kiếm số lần x
             count++;
         }
     }
-    if(count > 0) { // nếu có xuất hiện mảng A trong B mới in còn không xuất hiện tức count = 0 thì kết thúc
+    if(count > 0) { 
         cout << count << " lan." << endl;
         cout << "Mang A xuat hien tai cac chi so: ";
         for(int i = 0; i < count; i++) {
             cout << temp[i] << (i < count - 1 ? ", " : ".");
         }
+        cout << endl;
+    } else {
+        // xử lý khi count == 0
+        cout << "0 lan." << endl; 
     }
     delete[] temp;
 }
