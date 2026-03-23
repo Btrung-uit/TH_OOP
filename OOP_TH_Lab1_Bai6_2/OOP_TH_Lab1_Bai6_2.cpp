@@ -223,10 +223,10 @@ void DanhSachDiemToanThapNhat(Hs ds[], int n) {
         }
     }
     cout << "================================================================================================" << endl;
-    cout << "\n=============DANH SACH HOC SINH CO DIEM TOAN THAP NHAT (" << min_toan << " diem)==============" << endl;
+    cout << "\n======================DANH SACH HOC SINH CO DIEM TOAN THAP NHAT (" << min_toan << " diem)=====================" << endl;
     for(int i = 0; i < n; i++) {
         if(ds[i].toan == min_toan) {
-            cout << "Ten: "<< ds[i].ten << endl;
+            cout << "Ten: "<< ds[i].ten << " | Diem Toan: " << ds[i].toan << endl;
         }
     }
 }
