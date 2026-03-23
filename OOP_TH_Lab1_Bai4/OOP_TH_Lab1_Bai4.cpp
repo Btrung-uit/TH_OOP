@@ -12,7 +12,7 @@ double KiemTra() { // hàm kiểm tra điều kiện đầu vào có phải là 
     double n;
     while(true) {
         if(cin >> n) {
-            // nếu đúng là số nguyên thì thoát vòng lặp
+            // nếu đúng là số thực thì thoát vòng lặp
             break;
         }
         else {
