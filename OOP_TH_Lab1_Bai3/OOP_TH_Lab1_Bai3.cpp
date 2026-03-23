@@ -61,9 +61,7 @@ int ucln(int a, int b) { // hàm tìm ước chung lớn nhất của tử và m
  * Đầu ra: Không trả về giá trị, nhưng thay đổi giá trị của tuso và mauso để rút gọn.
  */
 void RutGon(int &tuso, int &mauso) { // hàm thực hiện rút gọn phân số
-    tuso = abs(tuso); // chuyển số âm thành dương
-    mauso = abs(mauso); // chuyển số âm thành dương
-    int uocChung = ucln(tuso, mauso); // tìm ước chung
+    int uocChung = ucln(abs(tuso), abs(mauso)); // tìm ước chung
     tuso/=uocChung; // thực hiện chia tử cho ước chung tìm được ở trên để rút gọn
     mauso/=uocChung; // thực hiện chia mẫu cho ước chung tìm được ở trên để rút gọn
 }
@@ -137,6 +135,10 @@ void Tich(PhanSo p1, PhanSo p2) { // hàm tính tích 2 phân số
  */
 void Thuong(PhanSo p1, PhanSo p2) { // hàm tính thương 2 phân số
     cout << "Thuong hai phan so la: ";
+    if (p2.tuso == 0) {
+        cout << "Khong the chia do phan so thu 2 bang 0!" << endl;
+        return;
+    }
     int tuso = p1.tuso*p2.mauso;
     int mauso = p1.mauso*p2.tuso;
     RutGon(tuso, mauso);
