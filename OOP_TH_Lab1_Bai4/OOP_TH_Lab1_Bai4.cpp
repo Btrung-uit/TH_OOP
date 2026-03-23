@@ -52,5 +52,5 @@ int main() {
     double x;
     cout << "Nhap gia tri cua x: ";
     x = KiemTra();
-    cout << "Gia tri cua sin(x)  voi do chinh xac 0.00001 la: " << tinhSin(x);
+    cout << "Gia tri cua sin(x) voi do chinh xac 0.00001 la: " << tinhSin(x);
 }
