@@ -222,7 +222,8 @@ void DanhSachDiemToanThapNhat(Hs ds[], int n) {
             min_toan = ds[i].toan;
         }
     }
-    cout << "\n>>> DANH SACH HOC SINH CO DIEM TOAN THAP NHAT (" << min_toan << " diem):" << endl;
+    cout << "================================================================================================" << endl;
+    cout << "\n=============DANH SACH HOC SINH CO DIEM TOAN THAP NHAT (" << min_toan << " diem)==============" << endl;
     for(int i = 0; i < n; i++) {
         if(ds[i].toan == min_toan) {
             cout << "Ten: "<< ds[i].ten << endl;
@@ -250,6 +251,7 @@ int main() {
     if(tuKhoa.length() > 0) {
         TimKiemTheoTen(ds, n, tuKhoa);
     }
+    DanhSachDiemToanThapNhat(ds, n);
     cout << "================================================================================================" << endl;
     cout << "========================================KET THUC================================================\n";
     return 0;
