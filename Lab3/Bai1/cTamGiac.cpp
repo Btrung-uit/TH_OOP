@@ -91,14 +91,17 @@ void cTamGiac::Xuat()
 /**
  * @brief Xác định và in ra màn hình loại của tam giác.
  * @param Không có.
- * @return Không có (hàm in trực tiếp kết quả ra console).
+ * @return Không có.
  * @note Giải thuật:
- *       1. Tính độ dài 3 cạnh AB, AC, BC bằng hàm tính khoảng cách.
- *       2. Kiểm tra điều kiện tồn tại tam giác (Tổng 2 cạnh lớn hơn cạnh còn lại).
- *       3. Phân loại theo thứ tự ưu tiên:
- *          - Nếu 3 cạnh bằng nhau: Tam giác đều.
- *          - Nếu có 2 cạnh bằng nhau: Kiểm tra thêm định lý Pytago để xác định Vuông cân hay chỉ là Cân.
- *          - Nếu không có cạnh nào bằng nhau: Kiểm tra định lý Pytago để xác định Vuông hay Thường.
+ *       1. Tính độ dài 3 cạnh AB, AC, BC bằng công thức khoảng cách Euclide.
+ *       2. Sử dụng sai số epsilon (1e-9) để so sánh các số thực (double), tránh lỗi làm tròn.
+ *       3. Kiểm tra điều kiện tồn tại tam giác (Tổng 2 cạnh > cạnh còn lại + epsilon).
+ *       4. Phân loại theo thứ tự ưu tiên:
+ *          - Tam giác đều: Nếu trị tuyệt đối hiệu các cặp cạnh < epsilon.
+ *          - Tam giác cân: Nếu có một cặp cạnh bằng nhau (xét theo epsilon).
+ *            Tiếp tục kiểm tra định lý Pytago để phân biệt "Vuông cân" hay "Cân thường".
+ *          - Tam giác vuông: Nếu thỏa mãn định lý Pytago (tổng bình phương 2 cạnh ≈ bình phương cạnh còn lại).
+ *          - Tam giác thường: Các trường hợp còn lại.
  */
 void cTamGiac::KiemTraLoaiTamGiac()
 {
@@ -106,22 +109,34 @@ void cTamGiac::KiemTraLoaiTamGiac()
     double AB = a.TinhKhoangCach(b);
     double AC = a.TinhKhoangCach(c);
     double BC = b.TinhKhoangCach(c);
-    if (AB + AC > BC && AB + BC > AC && AC + BC > AB)
+
+    double epsilon = 1e-9;
+
+    // Kiểm tra tồn tại tam giác
+    if (AB + AC > BC + epsilon && AB + BC > AC + epsilon && AC + BC > AB + epsilon)
     {
-        if (AB == AC && AC == BC)
+        // 1. Kiểm tra Đều
+        if (abs(AB - AC) < epsilon && abs(AC - BC) < epsilon)
         {
             cout << "Tam giac deu";
         }
-        else if (AB == BC || BC == AC || AB == AC)
+        // 2. Kiểm tra Cân
+        else if (abs(AB - BC) < epsilon || abs(BC - AC) < epsilon || abs(AB - AC) < epsilon)
         {
-            if (AB * AB + AC * AC == BC * BC || AB * AB + BC * BC == AC * AC || AC * AC + BC * BC == AB * AB)
+            // Kiểm tra Vuông Cân
+            if (abs(AB * AB + AC * AC - BC * BC) < epsilon ||
+                abs(AB * AB + BC * BC - AC * AC) < epsilon ||
+                abs(AC * AC + BC * BC - AB * AB) < epsilon)
             {
                 cout << "Tam giac vuong can";
             }
             else
                 cout << "Tam giac can";
         }
-        else if (AB * AB + AC * AC == BC * BC || AB * AB + BC * BC == AC * AC || AC * AC + BC * BC == AB * AB)
+        // 3. Kiểm tra Vuông
+        else if (abs(AB * AB + AC * AC - BC * BC) < epsilon ||
+                 abs(AB * AB + BC * BC - AC * AC) < epsilon ||
+                 abs(AC * AC + BC * BC - AB * AB) < epsilon)
         {
             cout << "Tam giac vuong";
         }
@@ -132,6 +147,7 @@ void cTamGiac::KiemTraLoaiTamGiac()
         cout << "Khong phai tam giac";
     cout << "\n";
 }
+
 /**
  * @brief Tính chu vi tam giác.
  * @param Không có.
