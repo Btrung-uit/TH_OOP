@@ -205,17 +205,17 @@ void cTamGiac::TinhTien()
     cout << "Da tinh tien thanh cong!\n";
 }
 /**
- * @brief Quay tam giác.
- * @param Không có.
- * @return void (Hàm không trả về giá trị).
+ * @brief Quay toàn bộ tam giác quanh gốc tọa độ (0, 0).
+ * @param Không có (Người dùng nhập góc quay trực tiếp từ bàn phím).
+ * @return Không có.
  * @note Giải thuật:
- *          1. Nhập góc cần quay.
- *          2. Đổi từ góc có đơn vị độ sang góc có đơn vị radian
- *          3. lần lượt tính tọa độ x, y mới của từng điểm a, b, c theo
- *             công thức:
- *                  - x' = x*cosa - y*sina
- *                  - y' = x*sina + y*cosa
- *          4. Lưu các tọa độ mới của các điểm
+ *       1. Nhận góc quay (độ) và đổi sang Radian: rad = độ * (PI / 180).
+ *       2. Với mỗi đỉnh (a, b, c), tính tọa độ mới theo công thức:
+ *          - x_mới = x*cos(rad) - y*sin(rad)
+ *          - y_mới = x*sin(rad) + y*cos(rad)
+ *       3. Sử dụng các biến tạm (xA_moi, yA_moi...) để lưu giá trị trước khi cập nhật,
+ *          tránh việc dùng tọa độ mới tính cho bước sau.
+ *       4. Cập nhật lại tọa độ các đỉnh của tam giác.
  */
 void cTamGiac::Quay()
 {
