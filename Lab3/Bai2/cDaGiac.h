@@ -1,8 +1,5 @@
 #pragma once
-
 #include "Diem.h"
-#include <iostream>
-using namespace std;
 class cDaGiac
 {
 private:

@@ -23,7 +23,6 @@ cDaGiac::~cDaGiac()
 void cDaGiac::Nhap()
 {
     cout << "Nhap so dinh cua da giac (n > 2): ";
-    int n;
     while (cin >> n)
     {
         if (n > 2)
@@ -41,9 +40,9 @@ void cDaGiac::Nhap()
 }
 void cDaGiac::Xuat()
 {
+    cout << "Toa do cac dinh cua da giac (" << n << " dinh):\n";
     for (int i = 0; i < n; i++)
     {
-        cout << "Toa do cac dinh cua da giac (" << n << " dinh):\n";
         dsDiem[i].XuatDiem();
         cout << "\n";
     }
@@ -186,8 +185,20 @@ void cDaGiac::Quay()
     {
         double x_cu = dsDiem[i].LayX();
         double y_cu = dsDiem[i].LayY();
-        dsDiem[i].DatX(x_cu * cos(rad) - y_cu * sin(rad));
-        dsDiem[i].DatY(x_cu * sin(rad) + y_cu * cos(rad));
+
+        // 1. Tính toán tọa độ mới
+        double x_moi = x_cu * cos(rad) - y_cu * sin(rad);
+        double y_moi = x_cu * sin(rad) + y_cu * cos(rad);
+
+        // 2. Chuẩn hóa sai số (Nếu quá gần 0 thì gán thẳng bằng 0)
+        if (abs(x_moi) < 1e-9)
+            x_moi = 0.0;
+        if (abs(y_moi) < 1e-9)
+            y_moi = 0.0;
+
+        // 3. Cập nhật tọa độ
+        dsDiem[i].DatX(x_moi);
+        dsDiem[i].DatY(y_moi);
     }
     cout << "Quay thanh cong!\n";
 }
