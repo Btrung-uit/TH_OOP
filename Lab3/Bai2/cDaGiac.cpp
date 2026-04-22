@@ -3,16 +3,39 @@
 #include "cDaGiac.h"
 using namespace std;
 
+/**
+ * @brief Hàm khởi tạo mặc định. Khởi tạo một đa giác rỗng chưa có đỉnh.
+ * @param Không có
+ * @return Không có
+ * @note Giải thuật: Khởi tạo số lượng đỉnh (n) bằng 0 và đặt con trỏ quản lý mảng điểm (dsDiem)
+ *                   trỏ vào vùng nhớ rỗng (nullptr).
+ */
 cDaGiac::cDaGiac()
 {
     n = 0;
     dsDiem = nullptr;
 }
+
+/**
+ * @brief Hàm khởi tạo có tham số. Cấp phát mảng động để chứa các đỉnh của đa giác.
+ * @param soDinh Số lượng đỉnh cần tạo cho đa giác (kiểu int).
+ * @return Không có
+ * @note Giải thuật: Gán số lượng đỉnh bằng tham số đầu vào, sau đó sử dụng toán tử new để cấp
+ *                   phát một mảng động kiểu Diem với kích thước tương ứng.
+ */
 cDaGiac::cDaGiac(int soDinh)
 {
     n = soDinh;
     dsDiem = new Diem[n];
 }
+
+/**
+ * @brief Hàm hủy. Giải phóng vùng nhớ đã cấp phát cho mảng động dsDiem để tránh rò rỉ bộ nhớ.
+ * @param Không có
+ * @return Không có
+ * @note Giải thuật: Kiểm tra con trỏ dsDiem có đang trỏ tới vùng nhớ nào không. Nếu có, sử
+ *                   dụng toán tử delete[] để thu hồi toàn bộ mảng động đã cấp phát.
+ */
 cDaGiac::~cDaGiac()
 {
     if (dsDiem)
@@ -20,6 +43,18 @@ cDaGiac::~cDaGiac()
         delete[] dsDiem;
     }
 }
+
+/**
+ * @brief Nhập số lượng đỉnh (yêu cầu n > 2) và tọa độ từng đỉnh của đa giác.
+ * @param Không có
+ * @return void (Hàm không trả về giá trị).
+ * @note Giải thuật:
+ *          1. Sử dụng vòng lặp kiểm tra để đảm bảo người dùng nhập số đỉnh n > 2.
+ *          2. Kiểm tra và giải phóng mảng dsDiem cũ (nếu có) để tránh rò rỉ bộ nhớ trước khi cấp
+ *             phát mới.
+ *          3. Cấp phát mảng động mới bằng kích thước n.
+ *          4. Sử dụng vòng lặp for duyệt qua từng phần tử và gọi hàm NhapDiem() để lấy tọa độ.
+ */
 void cDaGiac::Nhap()
 {
     cout << "Nhap so dinh cua da giac (n > 2): ";
@@ -38,6 +73,13 @@ void cDaGiac::Nhap()
         dsDiem[i].NhapDiem();
     }
 }
+
+/**
+ * @brief Lần lượt xuất tọa độ tất cả các đỉnh của đa giác ra màn hình.
+ * @param Không có
+ * @return void (Hàm không trả về giá trị).
+ * @note Giải thuật: Sử dụng vòng lặp for chạy từ 0 đến n-1, lần lượt gọi phương thức XuatDiem() của từng đối tượng Diem trong mảng động để in dữ liệu ra màn hình.
+ */
 void cDaGiac::Xuat()
 {
     cout << "Toa do cac dinh cua da giac (" << n << " dinh):\n";
@@ -55,7 +97,8 @@ void cDaGiac::Xuat()
  *       1. Tính độ dài cạnh đầu tiên làm chuẩn.
  *       2. So sánh tất cả các cạnh còn lại với cạnh chuẩn. Nếu có cạnh khác -> Đa giác thường.
  *       3. Tính khoảng cách từ trọng tâm (trung bình cộng tọa độ các đỉnh) đến từng đỉnh.
- *       4. Nếu tất cả khoảng cách đến tâm bằng nhau -> Đa giác đều. Ngược lại là đa giác có các cạnh bằng nhau nhưng không đều (ví dụ hình thoi).
+ *       4. Nếu tất cả khoảng cách đến tâm bằng nhau -> Đa giác đều. Ngược lại là đa giác có các
+ *          cạnh bằng nhau nhưng không đều (ví dụ hình thoi).
  */
 void cDaGiac::KiemTraLoaiDaGiac()
 {
