@@ -2,7 +2,36 @@
 #include <cmath>
 #include "cDaGiac.h"
 using namespace std;
+/**
+ * @brief Kiểm tra xem toàn bộ n đỉnh có nằm trên cùng 1 đường thẳng không.
+ * @param Không có.
+ * @return true nếu tất cả thẳng hàng, false nếu có ít nhất 1 điểm lệch ra ngoài.
+ * @note Giải thuật: Dùng tích có hướng của vector (P1 - P0) và (Pi - P0).
+ */
+bool cDaGiac::KiemTraTatCaThangHang()
+{
+    // Nếu chưa có đủ 3 điểm thì không thể xét tính thẳng hàng
+    if (n < 3 || dsDiem == nullptr)
+        return false;
 
+    for (int i = 2; i < n; i++)
+    {
+        double vectorGocX = dsDiem[1].LayX() - dsDiem[0].LayX();
+        double vectorGocY = dsDiem[1].LayY() - dsDiem[0].LayY();
+
+        double vectorMoiX = dsDiem[i].LayX() - dsDiem[0].LayX();
+        double vectorMoiY = dsDiem[i].LayY() - dsDiem[0].LayY();
+
+        double tichCoHuong = (vectorGocX * vectorMoiY) - (vectorMoiX * vectorGocY);
+
+        // Nếu khác 0 (vượt quá sai số 1e-9) -> Có điểm không thẳng hàng -> Lập tức an toàn
+        if (abs(tichCoHuong) > 1e-9)
+        {
+            return false;
+        }
+    }
+    return true; // Chạy hết vòng lặp mà không thoát -> Tất cả đều thẳng hàng
+}
 /**
  * @brief Hàm khởi tạo mặc định. Khởi tạo một đa giác rỗng chưa có đỉnh.
  * @param Không có
@@ -64,16 +93,67 @@ void cDaGiac::Nhap()
             break;
         cout << "So dinh khong hop le (n > 2)! Vui long nhap lai: ";
     }
-    if (dsDiem)
-        delete[] dsDiem;
-    dsDiem = new Diem[n];
+    do
+    {
+        if (dsDiem)
+            delete[] dsDiem;
+        dsDiem = new Diem[n];
+        for (int i = 0; i < n; i++)
+        {
+            cout << "Nhap diem thu " << i + 1 << ":\n";
+            dsDiem[i].NhapDiem();
+        }
+        if (KiemTraTatCaThangHang())
+        {
+            cout << "Loi: Tat ca cac diem dang nam tren 1 duong thang!\n";
+            cout << "Vui long nhap lai toan bo toa do.\n";
+        }
+    } while (KiemTraTatCaThangHang());
+}
+/**
+ * @brief Sắp xếp các đỉnh theo thứ tự ngược chiều kim đồng hồ để tạo đa giác đơn.
+ * @param Không có.
+ * @return void.
+ * @note Giải thuật:
+ *          1. Tìm tọa độ trọng tâm (cx, cy).
+ *          2. Tính góc của từng đỉnh so với trọng tâm bằng hàm atan2.
+ *          3. Dùng Interchange Sort hoán vị các đối tượng Diem để góc tăng dần.
+ */
+void cDaGiac::SapXepCacDinh()
+{
+    if (n < 3)
+        return;
+
+    // Bước 1: Tính trọng tâm
+    double cx = 0, cy = 0;
     for (int i = 0; i < n; i++)
     {
-        cout << "Nhap diem thu " << i + 1 << ":\n";
-        dsDiem[i].NhapDiem();
+        cx += dsDiem[i].LayX();
+        cy += dsDiem[i].LayY();
     }
-}
+    cx /= n;
+    cy /= n;
 
+    // Bước 2 & 3: Sắp xếp theo góc (atan2)
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            // Tính góc của điểm i và điểm j so với trọng tâm
+            double goc1 = atan2(dsDiem[i].LayY() - cy, dsDiem[i].LayX() - cx);
+            double goc2 = atan2(dsDiem[j].LayY() - cy, dsDiem[j].LayX() - cx);
+
+            // Nếu góc 1 > góc 2 thì hoán vị 2 điểm
+            if (goc1 > goc2)
+            {
+                Diem tam = dsDiem[i];
+                dsDiem[i] = dsDiem[j];
+                dsDiem[j] = tam;
+            }
+        }
+    }
+    cout << "Da tu dong sap xep lai cac dinh!\n";
+}
 /**
  * @brief Lần lượt xuất tọa độ tất cả các đỉnh của đa giác ra màn hình.
  * @param Không có
@@ -299,5 +379,5 @@ void cDaGiac::ThuNho()
         dsDiem[i].DatX(dsDiem[i].LayX() * k);
         dsDiem[i].DatY(dsDiem[i].LayY() * k);
     }
-    cout << "Da thu nho đa giac thanh cong!\n";
+    cout << "Da thu nho da giac thanh cong!\n";
 }

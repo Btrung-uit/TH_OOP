@@ -5,6 +5,7 @@ int main()
 {
     cDaGiac dagiac;
     dagiac.Nhap();
+    dagiac.SapXepCacDinh();
     dagiac.Xuat();
     dagiac.KiemTraLoaiDaGiac();
     dagiac.TinhChuVi();

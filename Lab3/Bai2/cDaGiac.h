@@ -5,6 +5,7 @@ class cDaGiac
 private:
     int n;
     Diem *dsDiem;
+    bool KiemTraTatCaThangHang();
 
 public:
     cDaGiac();
@@ -12,6 +13,7 @@ public:
     ~cDaGiac();
     void Nhap();
     void Xuat();
+    void SapXepCacDinh();
     void KiemTraLoaiDaGiac();
     void TinhChuVi();
     void TinhDienTich();
