@@ -63,17 +63,22 @@ cArray::~cArray()
  * @param Không có.
  * @return Không có.
  * @note Giải thuật:
- *       1. Sử dụng srand(time(0)) để tạo hạt giống ngẫu nhiên theo thời gian.
- *       2. Duyệt qua mảng và dùng hàm rand() để gán giá trị trong đoạn [-99, 99].
+ *       1. Kiểm tra sự hợp lệ của số phần tử của mảng bằng vòng lặp.
+ *       2. Sử dụng srand(time(0)) để tạo hạt giống ngẫu nhiên theo thời gian.
+ *       3. Duyệt qua mảng và dùng hàm rand() để gán giá trị trong đoạn [-99, 99].
  */
 void cArray::TaoMangNgauNhien()
 {
-    cout << "Nhap so luong phan tu trong mang: ";
-    while (cin >> n)
+    cout << "Nhap so luong phan tu trong mang (n > 0): ";
+    while (true)
     {
-        if (n > 0)
+        if (cin >> n && n > 0)
+        {
             break;
+        }
         cout << "So luong phan tu khong hop le!\nVui long nhap lai: ";
+        cin.clear();             // Xóa cờ lỗi của cin
+        cin.ignore(10000, '\n'); // Dọn dẹp rác trong bộ nhớ đệm
     }
     if (array)
         delete[] array;

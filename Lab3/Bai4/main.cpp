@@ -1,6 +1,30 @@
 #include <iostream>
 #include "cArray.h"
 using namespace std;
+/**
+ * @brief Nhập và kiểm tra tính hợp lệ của số nguyên đầu vào.
+ * @param Không có.
+ * @return Giá trị số nguyên hợp lệ đã được nhập.
+ * @note Giải thuật:
+ *       1. Sử dụng vòng lặp vô tận (while true) để yêu cầu nhập dữ liệu cho đến khi thành công.
+ *       2. Sử dụng cin >> x làm điều kiện kiểm tra:
+ *          - Nếu nhập đúng kiểu số, trả về x và thoát hàm.
+ *          - Nếu nhập sai thì loại bỏ kí tự rác và nhập lại.
+ */
+int KiemTraHopLe()
+{
+    int x;
+    while (true)
+    {
+        if (cin >> x)
+        {
+            return x;
+        }
+        cout << "Gia tri khong hop le!\nVui long nhap lai: ";
+        cin.clear();             // Xóa cờ lỗi của cin
+        cin.ignore(10000, '\n'); // Dọn dẹp rác trong bộ nhớ đệm
+    }
+}
 int main()
 {
     cArray mang;
@@ -8,8 +32,7 @@ int main()
     mang.XuatMang();
     cout << "\nTim so lan x xuat hien trong mang\n";
     cout << "Nhap x: ";
-    int x;
-    cin >> x;
+    int x = KiemTraHopLe();
     cout << "So lan " << x << " xuat hien trong mang: ";
     cout << mang.DemSoLanXuatHien(x) << "\n";
     cout << "\nKiem tra mang tang dan\n";
