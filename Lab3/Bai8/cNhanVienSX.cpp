@@ -4,6 +4,10 @@
 
 using namespace std;
 
+/**
+ * @brief Hàm khởi tạo mặc định cho lớp Nhân viên sản xuất.
+ * @note Giải thuật: Thiết lập các chuỗi rỗng cho mã số, họ tên và gán giá trị 0 cho các chỉ số số lượng, đơn giá.
+ */
 cNhanVienSX::cNhanVienSX()
 {
     maNV = "";
@@ -12,46 +16,90 @@ cNhanVienSX::cNhanVienSX()
     donGia = 0.0;
 }
 
+// --- Nhóm các hàm Getter và Setter ---
+/**
+ * @brief Lấy mã nhân viên.
+ * @return Chuỗi mã nhân viên (string).
+ */
 string cNhanVienSX::getMaNV()
 {
     return maNV;
 }
 
+/**
+ * @brief Cập nhật mã nhân viên.
+ * @param m: Chuỗi mã mới.
+ */
 void cNhanVienSX::setMaNV(string m)
 {
     maNV = m;
 }
 
+/**
+ * @brief Lấy chuỗi họ và tên.
+ * @return Chuỗi họ và tên (string).
+ */
 string cNhanVienSX::getHoTen()
 {
     return hoTen;
 }
 
+/**
+ * @brief Cập nhật họ và tên.
+ * @param ht: Chuỗi họ và tên mới.
+ */
 void cNhanVienSX::setHoTen(string ht)
 {
     hoTen = ht;
 }
 
+/**
+ * @brief Lấy số sản phẩm.
+ * @return số sản phẩm (int).
+ */
 int cNhanVienSX::getSoSanPham()
 {
     return soSanPham;
 }
 
+/**
+ * @brief Cập nhật số sản phẩm.
+ * @param sp: Số sản phẩm mới.
+ */
 void cNhanVienSX::setSoSanPham(int sp)
 {
     soSanPham = sp;
 }
 
+/**
+ * @brief Lấy đơn giá.
+ * @return Đơn giá (double).
+ */
 double cNhanVienSX::getDonGia()
 {
     return donGia;
 }
 
+/**
+ * @brief Cập nhật đơn giá.
+ * @param dg: Đơn giá mới.
+ */
 void cNhanVienSX::setDonGia(double dg)
 {
     donGia = dg;
 }
 
+/**
+ * @brief Kiểm tra tính hợp lệ của họ tên (Chuẩn hóa tên).
+ * @param ten: Tham chiếu đến chuỗi họ tên cần kiểm tra.
+ * @return true nếu tên hợp lệ, false nếu vi phạm quy tắc.
+ * @note Giải thuật:
+ *       1. Kiểm tra độ dài (không trống và không quá 26 ký tự).
+ *       2. Kiểm tra khoảng trắng ở đầu/cuối chuỗi hoặc có 2 khoảng trắng liên tiếp.
+ *       3. Kiểm tra ký tự đặc biệt/số: Chỉ cho phép chữ cái A-Z, a-z và khoảng trắng.
+ *       4. Kiểm tra quy tắc viết hoa: Chữ cái đầu mỗi từ phải viết hoa, các chữ sau
+ *          phải viết thường.
+ */
 bool KiemTraTen(string &ten)
 { // Kiểm tra tính hợp lệ của tên
     int lenght = ten.length();
@@ -84,6 +132,14 @@ bool KiemTraTen(string &ten)
     return true;
 }
 
+/**
+ * @brief Nhập thông tin chi tiết của nhân viên sản xuất từ bàn phím.
+ * @note Giải thuật:
+ *       1. Nhập và bắt lỗi độ dài Mã NV (<= 8 ký tự).
+ *       2. Nhập Họ tên và sử dụng hàm KiemTraTen để bắt lỗi định dạng.
+ *       3. Gọi phương thức Nhap() của thuộc tính ngaySinh (đối tượng lớp cNgay).
+ *       4. Nhập và kiểm tra tính hợp lệ (số dương) cho Số sản phẩm và Đơn giá.
+ */
 void cNhanVienSX::Nhap()
 {
     cout << "Nhap Ma nhan vien (Toi da 8 ki tu): ";
@@ -141,6 +197,11 @@ void cNhanVienSX::Nhap()
     }
 }
 
+/**
+ * @brief Xuất thông tin nhân viên theo định dạng bảng.
+ * @note Giải thuật: Sử dụng các hàm setw(), left để căn lề đều các cột thông tin.
+ *       Kết quả bao gồm cả tiền lương được tính tự động.
+ */
 void cNhanVienSX::Xuat()
 {
     cout << setw(10) << left << maNV
@@ -152,11 +213,22 @@ void cNhanVienSX::Xuat()
          << " | Luong: " << TinhLuong() << "\n";
 }
 
+/**
+ * @brief Tính lương của nhân viên sản xuất.
+ * @return Giá trị lương (double).
+ * @note Giải thuật: Lương được tính bằng công thức: Số sản phẩm * Đơn giá.
+ */
 double cNhanVienSX::TinhLuong()
 {
     return soSanPham * donGia;
 }
 
+/**
+ * @brief Tính tuổi của nhân viên dựa trên năm hiện tại.
+ * @param namHienTai: Năm thực tế dùng để đối chiếu.
+ * @return Tuổi của nhân viên (int).
+ * @note Giải thuật: Lấy năm hiện tại trừ đi giá trị năm sinh nhận được từ đối tượng ngaySinh.
+ */
 int cNhanVienSX::getTuoi(int namHienTai)
 {
     return namHienTai - ngaySinh.getNam();
