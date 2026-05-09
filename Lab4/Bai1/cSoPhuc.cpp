@@ -1,5 +1,6 @@
 #include "cSoPhuc.h"
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 cSoPhuc::cSoPhuc(double t, double a)
@@ -21,14 +22,14 @@ cSoPhuc cSoPhuc::operator*(const cSoPhuc &khac) const
 {
     double thucMoi = thuc * khac.thuc - ao * khac.ao;
     double aoMoi = thuc * khac.ao + ao * khac.thuc;
-    return cSoPhuc(thuc - khac.thuc, ao - khac.ao);
+    return cSoPhuc(thucMoi, aoMoi);
 }
 cSoPhuc cSoPhuc::operator/(const cSoPhuc &khac) const
 {
     double mauSo = khac.thuc * khac.thuc + khac.ao * khac.ao;
     if (mauSo == 0)
         return cSoPhuc(0, 0);
-    double thucMoi = (ao * khac.thuc + thuc * khac.ao) / mauSo;
+    double thucMoi = (thuc * khac.thuc + ao * khac.ao) / mauSo;
     double aoMoi = (ao * khac.thuc - thuc * khac.ao) / mauSo;
     return cSoPhuc(thucMoi, aoMoi);
 }
@@ -42,39 +43,56 @@ bool cSoPhuc::operator!=(const cSoPhuc &khac) const
 {
     return !(*this == khac);
 }
+double NhapHopLe(istream &is)
+{
+    double so;
+    while (true)
+    {
+        if (is >> so)
+            return so;
+        cout << "Gia tri khong hop le!\nVui long nhap so thuc!\nNhap lai: ";
+        cin.clear();
+        cin.ignore(10000, '\n');
+    }
+}
 istream &operator>>(istream &is, cSoPhuc &sp)
 {
     cout << "Nhap phan tu thuc: ";
-    cin >> sp.thuc;
+    sp.thuc = NhapHopLe(is);
     cout << "Nhap phan tu ao: ";
-    cin >> sp.ao;
+    sp.ao = NhapHopLe(is);
     return is;
 }
 ostream &operator<<(ostream &os, const cSoPhuc &sp)
 {
     if (sp.thuc == 0 && sp.ao == 0)
     {
-        cout << 0;
+        os << 0;
+        return os;
     }
-    else if (sp.thuc == 0)
-    {
-        os << sp.ao << "i";
-    }
-    else if (sp.ao == 0)
+    if (sp.thuc != 0)
     {
         os << sp.thuc;
     }
-    else
+    if (sp.ao != 0)
     {
-        os << sp.thuc;
-        if (sp.ao > 0)
+        if (sp.ao > 0 && sp.thuc != 0)
         {
-            os << " + " << sp.ao << "i";
+            os << " + ";
         }
-        else
+        else if (sp.ao < 0 && sp.thuc != 0)
         {
-            os << " - " << -sp.ao << "i";
+            os << " - ";
         }
+        else if (sp.ao < 0 && sp.thuc == 0)
+        {
+            os << "-";
+        }
+        if (abs(sp.ao) != 1)
+        {
+            os << abs(sp.ao);
+        }
+        os << "i";
     }
     return os;
 }
