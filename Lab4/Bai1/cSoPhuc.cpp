@@ -51,8 +51,8 @@ double NhapHopLe(istream &is)
         if (is >> so)
             return so;
         cout << "Gia tri khong hop le!\nVui long nhap so thuc!\nNhap lai: ";
-        cin.clear();
-        cin.ignore(10000, '\n');
+        is.clear();
+        is.ignore(10000, '\n');
     }
 }
 istream &operator>>(istream &is, cSoPhuc &sp)
