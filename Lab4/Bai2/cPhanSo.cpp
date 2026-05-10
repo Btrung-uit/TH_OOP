@@ -1,5 +1,6 @@
 #include "cPhanSo.h"
 #include <cmath>
+#include <limits>
 
 /**
  * @brief Tìm ước số chung lớn nhất (UCLN) của hai số nguyên.
@@ -29,14 +30,11 @@ int TimUCLN(int a, int b)
  * @return int Giá trị số nguyên đã được xác thực hợp lệ.
  * @note Giải thuật:
  *      - Bước 1: Trích xuất thử một số nguyên từ đầu luồng nhập.
- *      - Bước 2: Dùng vòng lặp quét từng ký tự còn sót lại trong
- *                bộ đệm cho đến khi đụng phím Enter ('\n').
- *      - Bước 3: Nếu phát hiện bất kỳ ký tự nào không phải khoảng
- *                trắng (như dấu chấm, chữ cái), đánh dấu đầu vào
- *                là sai định dạng.
- *      - Bước 4: Nếu đầu vào hợp lệ, trả về kết quả. Nếu lỗi,
- *                dọn dẹp luồng (clear, ignore) và yêu cầu nhập
- *                lại từ đầu.
+ *      - Bước 2: Dùng peek() kiểm tra các ký tự còn lại trên dòng.
+ *      - Bước 3: Nếu phát hiện ký tự không phải khoảng trắng
+ *                (như dấu chấm, chữ cái), đánh dấu đầu vào sai.
+ *      - Bước 4: Nếu đầu vào hợp lệ, bỏ qua ký tự newline và trả về.
+ *      - Bước 5: Nếu lỗi, dọn dẹp luồng (clear, ignore) và yêu cầu nhập lại.
  */
 int NhapHopLe(istream &is)
 {
@@ -47,15 +45,19 @@ int NhapHopLe(istream &is)
         {
             bool chuoiHopLe = true;
             char c;
-            while (is.get(c) && c != '\n')
+            while (true)
             {
+                c = is.peek();
+                if (c == '\n' || c == EOF)
+                    break;
                 if (c != ' ' && c != '\t')
-                {
                     chuoiHopLe = false;
-                }
+                is.get();
             }
             if (chuoiHopLe)
             {
+                if (is.peek() == '\n')
+                    is.get();
                 return so;
             }
         }
