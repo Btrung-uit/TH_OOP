@@ -1,10 +1,26 @@
 #include <iostream>
 #include <limits>
-#include <windows.h> // Hỗ trợ hàm dịch chuyển con trỏ và Sleep
+#include <windows.h> // Hàm dịch chuyển con trỏ và Sleep
 #include "CTime.h"
 
 using namespace std;
 
+/**
+ * @brief Nhập và ép luồng dữ liệu số nguyên lớn hơn hoặc bằng 0,
+ *        loại bỏ hoàn toàn ký tự rác đi kèm.
+ * @param thoiGian: Tham chiếu đến biến nguyên nhận giá trị thời
+ *        gian cần kiểm tra.
+ * @return Không có.
+ * @note Giải thuật:
+ *       1. Chạy vòng lặp vô hạn và đọc dữ liệu thông qua
+ *          cin >> thoiGian kết hợp chặn điều kiện >= 0.
+ *       2. Sử dụng cin.peek() duyệt từng ký tự kế sau để kiểm
+ *          tra lỗi người dùng nhập số kèm chữ (Ví dụ: 120abc).
+ *       3. Nếu xuất hiện ký tự lạ không phải khoảng trắng/tab,
+ *          gán cờ lỗi chuoiHopLe = false để yêu cầu nhập lại.
+ *       4. Tiến hành xóa cờ lỗi dữ liệu stream và dọn sạch
+ *          buffer nếu đầu vào không đạt chuẩn.
+ */
 void KiemTraDauVao(int &thoiGian)
 {
     while (true)
@@ -37,7 +53,18 @@ void KiemTraDauVao(int &thoiGian)
         }
     }
 }
-// Hàm đưa con trỏ đến vị trí x (cột), y (hàng) trên màn hình Console
+
+/**
+ * @brief Di chuyển con trỏ hiển thị của hệ thống đến một tọa độ xác
+ *        định trên màn hình Console.
+ * @param x: Tọa độ vị trí theo cột (trục hoành - tính từ trái sang).
+ * @param y: Tọa độ vị trí theo dòng (trục tung - tính từ trên xuống).
+ * @return Không có.
+ * @note Giải thuật: Khởi tạo cấu trúc COORD lưu cặp giá trị
+ *       (x, y) mục tiêu, sau đó gọi hàm hệ thống
+ *       SetConsoleCursorPosition của thư viện Windows API
+ *       để dịch chuyển con trỏ.
+ */
 void GotoXY(int x, int y)
 {
     COORD coord;
@@ -46,7 +73,15 @@ void GotoXY(int x, int y)
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
-// Hàm ẩn con trỏ nhấp nháy để màn hình đồng hồ không bị giật
+/**
+ * @brief Ẩn con trỏ nhập liệu nhấp nháy trên cửa sổ dòng lệnh Console.
+ * @param Không có.
+ * @return Không có.
+ * @note Giải thuật: Khai báo cấu trúc CONSOLE_CURSOR_INFO, gán thuộc
+ *       tính bVisible thành FALSE rồi truyền vào hàm
+ *       SetConsoleCursorInfo giúp giao diện không bị hiện tượng nhấp
+ *       nháy liên tục khi vẽ lại.
+ */
 void AnConTro()
 {
     CONSOLE_CURSOR_INFO cursor;
@@ -55,7 +90,17 @@ void AnConTro()
     SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor);
 }
 
-// Hàm mới: Tự động lấy chiều rộng hiện tại của màn hình Console
+/**
+ * @brief Tự động truy vấn và lấy giá trị chiều rộng thực tế hiện
+ *        tại của cửa sổ Console.
+ * @param Không có.
+ * @return Giá trị số cột (chiều rộng) hiện tại của
+ *         màn hình Console (int).
+ * @note Giải thuật: Sử dụng hàm GetConsoleScreenBufferInfo để nạp
+ *       thông tin hình học của Terminal vào cấu trúc dữ liệu, sau
+ *       đó tính toán khoảng cách hiệu giữa lề phải (srWindow.Right)
+ *       và lề trái (srWindow.Left) để tìm ra số cột.
+ */
 int LayChieuRongConsole()
 {
     CONSOLE_SCREEN_BUFFER_INFO csbi;
