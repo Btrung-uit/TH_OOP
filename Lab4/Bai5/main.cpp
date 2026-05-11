@@ -60,14 +60,7 @@ int main()
     cout << "--- TINH GIA TRI DA THUC P ---\n";
     cout << "Nhap x: ";
     double x;
-    while (true)
-    {
-        if (cin >> x)
-            break;
-        cout << "Gia tri khong hop le!\nVui long nhap lai: ";
-        cin.clear();
-        cin.ignore(10000, '\n');
-    }
+    KiemTraDauVaoChoDouble(x);
     cout << "P(" << x << ") = " << P.TinhGiaTri(x) << "\n\n";
 
     cout << "--- NHAP DA THUC Q ---\n";
