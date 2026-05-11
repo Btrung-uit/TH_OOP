@@ -45,12 +45,9 @@ void KiemTraDauVaoChoNgay(int &thoiGian)
                 return;
             }
         }
-        else
-        {
-            cout << "Loi! Thoi gian khong hop le!\nVui long nhap lai: ";
-            cin.clear();
-            cin.ignore(10000, '\n');
-        }
+        cout << "Loi! Thoi gian khong hop le!\nVui long nhap lai: ";
+        cin.clear();
+        cin.ignore(10000, '\n');
     }
 }
 
@@ -93,6 +90,8 @@ void KiemTraDauVaoChoDouble(double &giaTri)
             {
                 return;
             }
+            cout << "Gia tri khong hop le!\nVui long nhap so thuc khong am!\nNhap lai: ";
+            continue;
         }
         cout << "Gia tri khong hop le!\nVui long nhap so thuc khong am!\nNhap lai: ";
         cin.clear();
