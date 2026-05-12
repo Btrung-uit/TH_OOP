@@ -331,6 +331,11 @@ istream &operator>>(istream &is, CVector &p)
  */
 ostream &operator<<(ostream &os, const CVector &p)
 {
+    if (p.n == 0)
+    {
+        cout << "(Vector rong)";
+        return os;
+    }
     os << "(";
     for (int i = 0; i < p.n; i++)
     {
