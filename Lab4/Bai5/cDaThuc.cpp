@@ -155,7 +155,7 @@ int NhapHopLe(istream &is)
 /**
  * @brief Nhập và ép luồng dữ liệu số thực, loại bỏ hoàn
  *        toàn các ký tự rác đi kèm.
- * @param không có.
+ * @param is: Đối tượng luồng nhập (istream).
  * @return giaTri: double.
  * @note Giải thuật:
  *       1. Sử dụng vòng lặp vô hạn và đọc dữ liệu thông qua toán
