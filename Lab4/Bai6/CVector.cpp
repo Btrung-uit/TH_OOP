@@ -325,7 +325,8 @@ istream &operator>>(istream &is, CVector &p)
  *           thông tin.
  * @return ostream&: Trả về tham chiếu của luồng xuất để hỗ trợ
  *         in nối tiếp dữ liệu.
- * @note Giải thuật: In ký tự mở ngoặc "(", dùng vòng lặp xuất
+ * @note Giải thuật: nếu số chiều = 0 thì in ra vector rỗng nếu
+ *       không thì in ký tự mở ngoặc "(", dùng vòng lặp xuất
  *       tuần tự các phần tử trong mảng cách nhau bởi dấu phẩy
  *       ", ", và kết thúc bằng ký tự đóng ngoặc ")".
  */
