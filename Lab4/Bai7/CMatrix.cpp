@@ -4,8 +4,20 @@
 
 using namespace std;
 // === QUẢN LÝ BỘ NHỚ ===
+
+/**
+ * @brief Hàm khởi tạo mặc định cho đối tượng ma trận.
+ * @param Không có.
+ * @return Không có.
+ */
 CMatrix::CMatrix() : m(0), n(0), phanTu(nullptr) {}
 
+/**
+ * @brief Hàm khởi tạo ma trận với số hàng và số cột xác định.
+ * @param hang: Số lượng hàng của ma trận.
+ * @param cot: Số lượng cột của ma trận.
+ * @return Không có.
+ */
 CMatrix::CMatrix(int hang, int cot) : m(hang), n(cot)
 {
     if (m == 0 || n == 0)
@@ -22,6 +34,14 @@ CMatrix::CMatrix(int hang, int cot) : m(hang), n(cot)
     }
 }
 
+/**
+ * @brief Hàm hủy đối tượng ma trận để giải phóng bộ nhớ động.
+ * @param Không có.
+ * @return Không có.
+ * @note Giải thuật:
+ *       1. Duyệt qua từng hàng để giải phóng bộ nhớ của mảng một chiều (các cột).
+ *       2. Giải phóng mảng con trỏ quản lý các hàng.
+ */
 CMatrix::~CMatrix()
 {
     if (phanTu)
@@ -32,6 +52,12 @@ CMatrix::~CMatrix()
     }
 }
 
+/**
+ * @brief Hàm khởi tạo sao chép (Copy Constructor) tạo bản sao độc lập từ ma trận
+ *        khác.
+ * @param khac: Đối tượng ma trận nguồn cần sao chép.
+ * @return Không có.
+ */
 CMatrix::CMatrix(const CMatrix &khac) : m(khac.m), n(khac.n)
 {
     if (m == 0 || n == 0)
@@ -48,6 +74,15 @@ CMatrix::CMatrix(const CMatrix &khac) : m(khac.m), n(khac.n)
     }
 }
 
+/**
+ * @brief Nạp chồng toán tử gán để sao chép sâu dữ liệu giữa hai ma trận.
+ * @param khac: Đối tượng ma trận nguồn.
+ * @return CMatrix&: Tham chiếu đến đối tượng hiện tại sau khi gán.
+ * @note Giải thuật:
+ *       1. Kiểm tra tự gán (this != &khac).
+ *       2. Giải phóng toàn bộ bộ nhớ cũ của ma trận hiện tại.
+ *       3. Cấp phát vùng nhớ mới và sao chép từng phần tử từ ma trận nguồn sang.
+ */
 CMatrix &CMatrix::operator=(const CMatrix &khac)
 {
     if (this != &khac)
@@ -77,6 +112,14 @@ CMatrix &CMatrix::operator=(const CMatrix &khac)
 }
 
 // === PHÉP TOÁN VỚI SỐ THỰC ===
+
+/**
+ * @brief Cộng ma trận với một số thực k.
+ * @param k: Số thực cần cộng vào từng phần tử.
+ * @return CMatrix: Ma trận kết quả sau khi cộng.
+ * @note Giải thuật: Duyệt qua từng phần tử tại vị trí [i][j] và thực hiện phép
+ *       cộng với k.
+ */
 CMatrix CMatrix::operator+(double k) const
 {
     CMatrix temp(m, n);
@@ -86,6 +129,13 @@ CMatrix CMatrix::operator+(double k) const
     return temp;
 }
 
+/**
+ * @brief Trừ ma trận cho một số thực k.
+ * @param k: Số thực cần trừ đi từ từng phần tử.
+ * @return CMatrix: Ma trận kết quả sau khi trừ.
+ * @note Giải thuật: Duyệt qua từng phần tử tại vị trí [i][j] và thực hiện phép
+ *       trừ cho k.
+ */
 CMatrix CMatrix::operator-(double k) const
 {
     CMatrix temp(m, n);
@@ -95,6 +145,12 @@ CMatrix CMatrix::operator-(double k) const
     return temp;
 }
 
+/**
+ * @brief Nhân ma trận với một số thực k.
+ * @param k: Hệ số tỉ lệ cần nhân.
+ * @return CMatrix: Ma trận mới sau khi nhân hệ số.
+ * @note Giải thuật: Duyệt qua từng phần tử tại vị trí [i][j] và nhân với k.
+ */
 CMatrix CMatrix::operator*(double k) const
 {
     CMatrix temp(m, n);
@@ -104,6 +160,14 @@ CMatrix CMatrix::operator*(double k) const
     return temp;
 }
 
+/**
+ * @brief Chia từng phần tử của ma trận cho một số thực k.
+ * @param k: Số thực thực hiện phép chia (k phải khác 0).
+ * @return CMatrix: Ma trận mới sau khi chia.
+ * @note Giải thuật:
+ *       1. Kiểm tra k có bằng 0 hay không để ném ngoại lệ lỗi.
+ *       2. Duyệt qua từng phần tử và thực hiện phép chia cho k.
+ */
 CMatrix CMatrix::operator/(double k) const
 {
     if (k == 0)
@@ -117,6 +181,15 @@ CMatrix CMatrix::operator/(double k) const
 }
 
 // === PHÉP TOÁN VỚI MA TRẬN ===
+
+/**
+ * @brief Cộng hai ma trận cùng kích thước.
+ * @param khac: Ma trận thứ hai tham gia phép cộng.
+ * @return CMatrix: Ma trận tổng.
+ * @note Giải thuật:
+ *       1. Kiểm tra điều kiện cùng số hàng và số cột.
+ *       2. Cộng các phần tử tương ứng tại từng vị trí [i][j].
+ */
 CMatrix CMatrix::operator+(const CMatrix &khac) const
 {
     if (this->m != khac.m || this->n != khac.n)
@@ -129,6 +202,14 @@ CMatrix CMatrix::operator+(const CMatrix &khac) const
     return temp;
 }
 
+/**
+ * @brief Trừ hai ma trận cùng kích thước.
+ * @param khac: Ma trận bị trừ.
+ * @return CMatrix: Ma trận hiệu.
+ * @note Giải thuật:
+ *       1. Kiểm tra điều kiện tương thích kích thước.
+ *       2. Trừ các phần tử tương ứng tại từng vị trí [i][j].
+ */
 CMatrix CMatrix::operator-(const CMatrix &khac) const
 {
     if (this->m != khac.m || this->n != khac.n)
@@ -141,6 +222,17 @@ CMatrix CMatrix::operator-(const CMatrix &khac) const
     return temp;
 }
 
+/**
+ * @brief Nạp chồng toán tử nhân hai ma trận (Matrix Multiplication).
+ * @param khac: Đối tượng ma trận thứ hai tham gia phép nhân.
+ * @return CMatrix: Ma trận tích có kích thước (hàng_1 x cột_2).
+ * @note Giải thuật:
+ *       1. Kiểm tra điều kiện nhân: Số cột ma trận 1 phải bằng số hàng ma trận 2.
+ *       2. Sử dụng 3 vòng lặp lồng nhau:
+ *          - Vòng lặp i, j để định vị phần tử tại hàng i, cột j của ma trận tích.
+ *          - Vòng lặp k để tính tổng các tích của hàng i (ma trận 1) và cột j
+ *            (ma trận 2).
+ */
 CMatrix CMatrix::operator*(const CMatrix &khac) const
 {
     if (this->n != khac.m)
@@ -163,6 +255,16 @@ CMatrix CMatrix::operator*(const CMatrix &khac) const
 }
 
 // === PHÉP TOÁN VỚI VECTOR ===
+
+/**
+ * @brief Nạp chồng toán tử nhân ma trận với một vector.
+ * @param v: Đối tượng CVector tham gia phép nhân.
+ * @return CVector: Một vector kết quả có số chiều bằng số hàng của ma trận.
+ * @note Giải thuật:
+ *       1. Kiểm tra điều kiện: Số cột của ma trận phải bằng số chiều của vector.
+ *       2. Thực hiện nhân từng hàng của ma trận với vector để tạo ra từng thành phần
+ *          tương ứng của vector kết quả.
+ */
 CVector CMatrix::operator*(const CVector &v) const
 {
     // CMatrix cần là friend của CVector để truy cập v.n và v.thanhPhan
@@ -278,6 +380,20 @@ double KiemTraSoThuc(istream &is)
     }
 }
 // === NHẬP / XUẤT ===
+
+/**
+ * @brief Nạp chồng toán tử nhập luồng để cấu hình kích thước và dữ liệu phần tử ma trận.
+ * @param is: Tham chiếu đến đối tượng luồng nhập (istream).
+ * @param mat: Tham chiếu đến đối tượng CMatrix cần lưu trữ dữ liệu.
+ * @return istream&: Trả về tham chiếu của luồng nhập.
+ * @note Giải thuật:
+ *       1. Nhập số hàng m và số cột n thông qua hàm NhapHopLeSoNguyen().
+ *       2. Giải phóng bộ nhớ động cũ của mảng hai chiều phanTu để chống rò rỉ.
+ *       3. Cấp phát mảng con trỏ mới cho m hàng, sau đó cấp phát mảng một chiều cho
+ *          từng n cột.
+ *       4. Dùng vòng lặp lồng nhau kết hợp hàm KiemTraSoThuc() để điền giá trị cho
+ *          từng ô [i][j].
+ */
 istream &operator>>(istream &is, CMatrix &mat)
 {
     cout << "Nhap so hang m: ";
@@ -287,7 +403,7 @@ istream &operator>>(istream &is, CMatrix &mat)
 
     if (mat.phanTu)
     {
-        for (int i = 0; i < mat.m; i++) // Có nguy cơ rác nếu mat.m cũ khác mới, nhưng ta giả định khởi tạo sạch
+        for (int i = 0; i < mat.m; i++)
             delete[] mat.phanTu[i];
         delete[] mat.phanTu;
     }
@@ -311,6 +427,17 @@ istream &operator>>(istream &is, CMatrix &mat)
     return is;
 }
 
+/**
+ * @brief Nạp chồng toán tử xuất luồng để in ma trận ra màn hình dưới dạng bảng.
+ * @param os: Tham chiếu đến đối tượng luồng xuất (ostream).
+ * @param mat: Tham chiếu hằng đến đối tượng CMatrix cần hiển thị.
+ * @return ostream&: Trả về tham chiếu của luồng xuất.
+ * @note Giải thuật:
+ *       1. Kiểm tra nếu ma trận rỗng thì thông báo "Ma tran rong".
+ *       2. Sử dụng vòng lặp lồng nhau in các phần tử theo hàng và cột.
+ *       3. Dùng `setw(8)` để căn chỉnh các con số thẳng hàng theo cột giúp dễ
+ *          quan sát.
+ */
 ostream &operator<<(ostream &os, const CMatrix &mat)
 {
     if (mat.m == 0 || mat.n == 0)
