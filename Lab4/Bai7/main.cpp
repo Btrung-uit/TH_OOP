@@ -5,15 +5,6 @@
 
 using namespace std;
 
-// Hàm hỗ trợ xuất dấu ngoặc cho số âm
-void InSo(double k)
-{
-    if (k < 0)
-        cout << "(" << k << ")";
-    else
-        cout << k;
-}
-
 /**
  * @brief Nhập và ép luồng dữ liệu số thực, loại bỏ hoàn
  *        toàn các ký tự rác đi kèm.
@@ -76,7 +67,10 @@ int main()
     k = KiemTraDauVaoChoDouble();
 
     cout << "MT1 + ";
-    InSo(k);
+    if (k < 0)
+        cout << "(" << k << ")";
+    else
+        cout << k;
     cout << " :\n";
     cout << (MT1 + k) << "\n";
 
