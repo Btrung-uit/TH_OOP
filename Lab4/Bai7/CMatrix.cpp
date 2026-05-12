@@ -199,7 +199,7 @@ CVector CMatrix::operator*(const CVector &v) const
  *       4. Dọn sạch cờ lỗi và bộ nhớ đệm luồng nếu dữ liệu sai
  *          quy chuẩn.
  */
-int NhapHopLe(istream &is)
+int NhapHopLeSoNguyen(istream &is)
 {
     int bac;
     while (true)
@@ -248,7 +248,7 @@ int NhapHopLe(istream &is)
  *          tiến hành xóa cờ lỗi của stream, dọn sạch bộ nhớ đệm
  *          và yêu cầu người dùng nhập lại.
  */
-double KiemTraDauVaoChoDouble(istream &is)
+double KiemTraSoThuc(istream &is)
 {
     double giaTri;
     while (true)
@@ -281,9 +281,9 @@ double KiemTraDauVaoChoDouble(istream &is)
 istream &operator>>(istream &is, CMatrix &mat)
 {
     cout << "Nhap so hang m: ";
-    mat.m = NhapHopLe(is);
+    mat.m = NhapHopLeSoNguyen(is);
     cout << "Nhap so cot n: ";
-    mat.n = NhapHopLe(is);
+    mat.n = NhapHopLeSoNguyen(is);
 
     if (mat.phanTu)
     {
@@ -305,7 +305,7 @@ istream &operator>>(istream &is, CMatrix &mat)
         for (int j = 0; j < mat.n; j++)
         {
             cout << "Nhap phan tu [" << i << "][" << j << "]: ";
-            mat.phanTu[i][j] = KiemTraDauVaoChoDouble(is);
+            mat.phanTu[i][j] = KiemTraSoThuc(is);
         }
     }
     return is;
