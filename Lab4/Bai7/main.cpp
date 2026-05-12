@@ -64,15 +64,13 @@ double KiemTraDauVaoChoDouble()
 
 int main()
 {
-    cout << "========== 1. NHAP MA TRAN 1 ==========\n";
+    cout << "1. NHAP MA TRAN 1\n";
     CMatrix MT1;
-    // Tạm thời dùng hàm nhập cơ bản của CMatrix để code gọn,
-    // thực tế bạn có thể nhúng Lưới lọc thẳng vào toán tử >> trong CMatrix.cpp
     cin >> MT1;
     cout << "MT1 vua nhap:\n"
          << MT1 << "\n";
 
-    cout << "========== 2. TINH TOAN VOI SO THUC ==========\n";
+    cout << "2. TINH TOAN VOI SO THUC\n";
     double k;
     cout << "Nhap mot so thuc k: ";
     k = KiemTraDauVaoChoDouble();
@@ -104,7 +102,7 @@ int main()
         cout << e.what() << "\n\n";
     }
 
-    cout << "========== 3. TINH TOAN VOI VECTOR ==========\n";
+    cout << "3. TINH TOAN VOI VECTOR\n";
     CVector v;
     cin >> v; // Nhập vector
     cout << "Tich MT1 * v:\n";
@@ -117,7 +115,7 @@ int main()
         cout << e.what() << "\n\n";
     }
 
-    cout << "========== 4. TINH TOAN VOI MA TRAN 2 ==========\n";
+    cout << "4. TINH TOAN VOI MA TRAN 2\n";
     CMatrix MT2;
     cin >> MT2;
     cout << "MT2 vua nhap:\n"
