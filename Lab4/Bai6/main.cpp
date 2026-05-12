@@ -4,7 +4,6 @@
 
 using namespace std;
 
-// Hàm hỗ trợ nhập số thực an toàn (Áp dụng Lưới lọc chuỗi)
 /**
  * @brief Nhập và ép luồng dữ liệu số thực, loại bỏ hoàn
  *        toàn các ký tự rác đi kèm.
@@ -57,41 +56,63 @@ int main()
 {
     CVector v1, v2;
 
-    cout << "========== KHOI TAO VECTOR ==========\n";
-    cout << "--- NHAP VECTOR THU NHAT (v1) ---\n";
+    cout << "NHAP VECTOR THU NHAT (v1)\n";
     cin >> v1;
     cout << "=> v1 = " << v1 << "\n\n";
 
-    cout << "--- NHAP VECTOR THU HAI (v2) ---\n";
+    cout << "NHAP VECTOR THU HAI (v2)\n";
     cin >> v2;
     cout << "=> v2 = " << v2 << "\n\n";
 
-    cout << "========== KIEM THU PHEP TOAN ==========\n";
+    cout << "PHEP TOAN\n";
 
     // 1. Phép cộng
-    CVector Tong = v1 + v2;
     cout << "1. Phep CONG hai vector (v1 + v2):\n";
-    cout << "   " << v1 << " + " << v2 << " = " << Tong << "\n\n";
-
+    cout << v1 << " + " << v2 << "\n= ";
+    try
+    {
+        CVector Tong = v1 + v2;
+        cout << Tong << "\n\n"; // Chỉ in Tong nếu phép tính thành công
+    }
+    catch (const invalid_argument &e)
+    {
+        cout << e.what() << "\n\n"; // In ra câu lỗi thay vì in ()
+    }
     // 2. Phép trừ
-    CVector Hieu = v1 - v2;
     cout << "2. Phep TRU hai vector (v1 - v2):\n";
-    cout << "   " << v1 << " - " << v2 << " = " << Hieu << "\n\n";
+    cout << v1 << " - " << v2 << "\n= ";
+    try
+    {
+        CVector Hieu = v1 - v2;
+        cout << Hieu << "\n\n";
+    }
+    catch (const invalid_argument &e)
+    {
+        cout << e.what() << "\n\n";
+    }
 
     // 3. Tích vô hướng
-    double TichVoHuong = v1 * v2;
     cout << "3. TICH VO HUONG hai vector (v1 * v2):\n";
-    cout << "   Gia tri = " << TichVoHuong << "\n\n";
-
+    cout << v1 << " * " << v2 << "\n= ";
+    try
+    {
+        double TichVoHuong = v1 * v2;
+        cout << TichVoHuong << "\n\n";
+    }
+    catch (const invalid_argument &e)
+    {
+        cout << e.what() << "\n\n";
+    }
     // 4. Nhân vector với một số thực (k)
     double k;
     cout << "4. Phep CO GIAN vector (v1 * k):\n";
-    cout << "   Nhap he so gian (k): ";
+    cout << "Nhap he so gian (k): ";
     k = KiemTraDauVaoChoDouble();
-
-    CVector TichCoGian = v1 * k;
-    cout << "   " << v1 << " * " << k << " = " << TichCoGian << "\n";
-    cout << "=========================================\n";
-
+    cout << "   " << v1 << " * ";
+    if (k < 0)
+        cout << "(" << k << ")";
+    else
+        cout << k;
+    cout << "\n= " << v1 * k << "\n";
     return 0;
 }
