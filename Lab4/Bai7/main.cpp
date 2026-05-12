@@ -6,6 +6,19 @@
 using namespace std;
 
 /**
+ * @brief Hàm hỗ trợ xuất dấu ngoặc cho số âm.
+ * @param k: double: giá trị tính toán
+ * @return void.
+ */
+void InSo(double k)
+{
+    if (k < 0)
+        cout << "(" << k << ")";
+    else
+        cout << k;
+}
+
+/**
  * @brief Nhập và ép luồng dữ liệu số thực, loại bỏ hoàn
  *        toàn các ký tự rác đi kèm.
  * @param Không có.
@@ -67,10 +80,7 @@ int main()
     k = KiemTraDauVaoChoDouble();
 
     cout << "MT1 + ";
-    if (k < 0)
-        cout << "(" << k << ")";
-    else
-        cout << k;
+    InSo(k);
     cout << " :\n";
     cout << (MT1 + k) << "\n";
 
