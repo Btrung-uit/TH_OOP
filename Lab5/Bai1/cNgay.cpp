@@ -1,41 +1,8 @@
 #include "cNgay.h"
+#include "CTienIch.h"
 #include <iostream>
 #include <iomanip>
 using namespace std;
-
-/**
- * @brief Nhập và kiểm tra một giá trị nguyên dương.
- * @param Không có.
- * @return Số nguyên dương hợp lệ
- * @note Giải thuật: Sử dụng vòng lặp while để ép người dùng nhập số nguyên dương.
- *       Xử lý xóa bộ nhớ đệm (cin.clear, cin.ignore) nếu người dùng nhập sai kiểu dữ liệu.
- */
-int NhapSoNguyenAnToan()
-{
-    int giaTri;
-    while (true)
-    {
-        if (cin >> giaTri && giaTri >= 0)
-        {
-            char c;
-            bool chuoiHopLe = true;
-            while (cin.get(c) && c != '\n')
-            {
-                if (c != ' ' && c != '\t')
-                {
-                    chuoiHopLe = false;
-                }
-            }
-            if (chuoiHopLe)
-            {
-                return giaTri;
-            }
-        }
-        cout << "Gia tri khong hop le! Vui long nhap mot so nguyen khong am: ";
-        cin.clear();
-        cin.ignore(10000, '\n');
-    }
-}
 
 /**
  * @brief Nhập bộ ba giá trị Ngày, Tháng, Năm từ bàn phím.
@@ -131,7 +98,7 @@ void cNgay::Nhap()
         NhapNgayThangNam(ngay, thang, nam);
         if (KiemTraNgayThangNamHopLe(ngay, thang, nam))
             return;
-        cout << "Ngay thang nam khong hop le!\n Vui long nhap lai: ";
+        cout << "Ngay khong hop le!\nVui long nhap lai:\n";
     }
 }
 

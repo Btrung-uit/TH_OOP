@@ -1,12 +1,14 @@
 #include "CNhanVienVP.h"
+#include "CTienIch.h"
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 void CNhanVienVP::Nhap()
 {
     CNhanVien::Nhap();
     cout << "Nhap so ngay lam viec: ";
-    cin >> SoNgayLamViec;
+    SoNgayLamViec = NhapSoNguyenAnToan();
 }
 void CNhanVienVP::TinhLuong()
 {
@@ -15,7 +17,7 @@ void CNhanVienVP::TinhLuong()
 void CNhanVienVP::Xuat()
 {
     CNhanVien::Xuat();
-    cout << " | So ngay lam viec: " << SoNgayLamViec << " | Luong: " << luong << "\n";
+    cout << "\nNgay lam viec: " << SoNgayLamViec << ", Luong: " << fixed << setprecision(0) << luong << " VND\n";
 }
 
 double CNhanVienVP::getLuong()

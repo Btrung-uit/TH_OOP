@@ -1,4 +1,5 @@
 #include "CCongTy.h"
+#include "CTienIch.h"
 #include <iostream>
 using namespace std;
 
@@ -29,35 +30,9 @@ CCongTy::~CCongTy()
     }
 }
 
-int CCongTy::NhapSoNguyenAnToan()
-{
-    int giaTri;
-    while (true)
-    {
-        if (cin >> giaTri && giaTri >= 0)
-        {
-            char c;
-            bool chuoiHopLe = true;
-            while (cin.get(c) && c != '\n')
-            {
-                if (c != ' ' && c != '\t')
-                {
-                    chuoiHopLe = false;
-                }
-            }
-            if (chuoiHopLe)
-            {
-                return giaTri;
-            }
-        }
-        cout << "Gia tri khong hop le! Vui long nhap mot so nguyen khong am: ";
-        cin.clear();
-        cin.ignore(10000, '\n');
-    }
-}
 void CCongTy::NhapDanhSach()
 {
-    cout << "Nhap danh sach nhan vien san xuat\n";
+    cout << "--Nhap danh sach nhan vien san xuat--\n";
     cout << "Nhap so luong nhan vien san xuat: ";
     SoLuongSX = NhapSoNguyenAnToan();
     DanhSachSX = new CNhanVienSX *[SoLuongSX];
@@ -68,7 +43,7 @@ void CCongTy::NhapDanhSach()
         DanhSachSX[i]->Nhap();
     }
 
-    cout << "\nNhap danh sach nhan vien van phong\n";
+    cout << "\n--Nhap danh sach nhan vien van phong--\n";
     cout << "Nhap so luong nhan vien van phong: ";
     SoLuongVP = NhapSoNguyenAnToan();
     DanhSachVP = new CNhanVienVP *[SoLuongVP];
@@ -82,8 +57,8 @@ void CCongTy::NhapDanhSach()
 
 void CCongTy::XuatDanhSach()
 {
-    cout << "\nDanh Sach nhan vien\n";
-    cout << "Danh sach nhan vien san xuat\n";
+    cout << "\n-----Danh Sach nhan vien-----\n";
+    cout << "---Danh sach nhan vien san xuat---\n";
     if (SoLuongSX == 0)
     {
         cout << "Danh sach trong\n";
@@ -91,9 +66,13 @@ void CCongTy::XuatDanhSach()
     for (int i = 0; i < SoLuongSX; i++)
     {
         DanhSachSX[i]->Xuat();
+        if (i < SoLuongSX - 1)
+        {
+            cout << "---------------------------------------------\n";
+        }
     }
 
-    cout << "\nDanh sach nhan vien van phong\n";
+    cout << "\n---Danh sach nhan vien van phong---\n";
     if (SoLuongVP == 0)
     {
         cout << "Danh sach trong\n";
@@ -101,6 +80,10 @@ void CCongTy::XuatDanhSach()
     for (int i = 0; i < SoLuongVP; i++)
     {
         DanhSachVP[i]->Xuat();
+        if (i < SoLuongVP - 1)
+        {
+            cout << "---------------------------------------------\n";
+        }
     }
 }
 
@@ -145,7 +128,7 @@ void CCongTy::TimNVSXLuongThapNhat()
             nvMin = DanhSachSX[i];
         }
     }
-    cout << "Nhan vien san xuat co muc luong thap nhat la:\n";
+    cout << "--Nhan vien san xuat co luong thap nhat la--\n";
     nvMin->Xuat();
 }
 
@@ -153,7 +136,7 @@ void CCongTy::TimNVVPTuoiCaoNhat()
 {
     if (SoLuongVP == 0)
     {
-        cout << "\n[Thong bao] Khong co nhan vien van phong nao trong he thong de so sanh!\n";
+        cout << "Khong co nhan vien van phong\n";
         return;
     }
 
@@ -170,6 +153,6 @@ void CCongTy::TimNVVPTuoiCaoNhat()
         }
     }
 
-    cout << "Nhan vien van phong co tuoi cao nhat la:\n";
+    cout << "\n--Nhan vien van phong co tuoi cao nhat la--\n";
     nvGiaNhat->Xuat();
 }

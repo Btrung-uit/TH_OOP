@@ -9,8 +9,6 @@ private:
     CNhanVienVP **DanhSachVP;
     int SoLuongVP;
 
-    int NhapSoNguyenAnToan();
-
 public:
     CCongTy();
     ~CCongTy();

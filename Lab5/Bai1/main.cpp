@@ -17,9 +17,9 @@ int main()
     congTy.XuatDanhSach();
 
     // Yêu cầu 4: Tính tổng lương mà công ty phải trả cho các nhân viên
-    cout << "\n==================================================\n";
+    cout << "\n---------------------------------------------\n";
     cout << "Tong luong cong ty phai tra: " << (long long)congTy.TinhTongLuong() << " VND\n";
-    cout << "==================================================\n";
+    cout << "---------------------------------------------\n\n";
 
     // Yêu cầu 5: Cho biết nhân viên sản xuất nào có lương thấp nhất
     congTy.TimNVSXLuongThapNhat();
