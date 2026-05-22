@@ -1,6 +1,6 @@
 #pragma once
-#include "CNhanVienSX.h"
-#include "CNhanVienVP.h"
+#include "../include/CNhanVienSX.h"
+#include "../include/CNhanVienVP.h"
 class CCongTy
 {
 private:

@@ -1,4 +1,4 @@
-#include "CTienIch.h"
+#include "../include/CTienIch.h"
 #include <iostream>
 using namespace std;
 

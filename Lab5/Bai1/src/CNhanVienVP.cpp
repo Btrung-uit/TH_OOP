@@ -1,5 +1,5 @@
-#include "CNhanVienVP.h"
-#include "CTienIch.h"
+#include "../include/CNhanVienVP.h"
+#include "../include/CTienIch.h"
 #include <iostream>
 #include <iomanip>
 using namespace std;

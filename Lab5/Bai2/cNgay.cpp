@@ -1,5 +1,5 @@
-#include "cNgay.h"
-#include "CTienIch.h"
+#include "../include/cNgay.h"
+#include "../include/CTienIch.h"
 #include <iostream>
 #include <iomanip>
 using namespace std;

@@ -1,5 +1,5 @@
-#include "CCongTy.h"
-#include "CTienIch.h"
+#include "../include/CCongTy.h"
+#include "../include/CTienIch.h"
 #include <iostream>
 using namespace std;
 

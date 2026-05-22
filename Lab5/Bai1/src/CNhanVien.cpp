@@ -1,4 +1,4 @@
-#include "CNhanVien.h"
+#include "../include/CNhanVien.h"
 #include <iostream>
 using namespace std;
 /**

@@ -1,5 +1,5 @@
 #pragma once
-#include "cNgay.h"
+#include "../include/cNgay.h"
 #include <string>
 using namespace std;
 class CNhanVien
