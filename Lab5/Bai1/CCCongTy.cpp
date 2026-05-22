@@ -154,10 +154,14 @@ double CCongTy::TinhTongLuong()
 }
 
 /**
- * @brief Tìm kiếm và hiển thị nhân viên thuộc khối sản xuất có mức lương thấp nhất.
+ * @brief Tìm và hiển thị tất cả nhân viên sản xuất có mức lương thấp nhất.
+ * Duyệt danh sách nhân viên sản xuất để tìm mức lương nhỏ nhất, sau đó
+ * in ra tất cả các nhân viên có mức lương bằng mức tối thiểu này.
  * @param Không có.
  * @return Không có.
- * @note Giải thuật: Sử dụng kỹ thuật lính canh. Giả định nhân viên đầu tiên có mức lương tối thiểu, chạy vòng lặp so sánh từ phần tử kế tiếp qua phương thức getLuong() để cập nhật lại con trỏ đích nvMin nếu phát hiện mức lương thấp hơn.
+ * @note Giải thuật: Sử dụng kỹ thuật lính canh để tìm mức lương nhỏ nhất
+ *       trong danh sách nhân viên sản xuất, sau đó duyệt lại danh sách để hiển
+ *       thị tất cả nhân viên có mức lương bằng mức tối thiểu.
  */
 void CCongTy::TimNVSXLuongThapNhat()
 {
@@ -174,18 +178,37 @@ void CCongTy::TimNVSXLuongThapNhat()
             nvMin = DanhSachSX[i];
         }
     }
+    int count = 0;
+    for (int i = 0; i < SoLuongSX; i++)
+    {
+        if (DanhSachSX[i]->getLuong() == nvMin->getLuong())
+        {
+            count++;
+        }
+    }
     cout << "--Nhan vien san xuat co luong thap nhat la--\n";
-    nvMin->Xuat();
+    for (int i = 0; i < SoLuongSX; i++)
+    {
+        if (DanhSachSX[i]->getLuong() == nvMin->getLuong())
+        {
+            DanhSachSX[i]->Xuat();
+            if (i < count - 1)
+            {
+                cout << "---------------------------------------------\n";
+            }
+        }
+    }
 }
 
 /**
- * @brief Tìm kiếm và hiển thị nhân viên thuộc khối văn phòng có độ tuổi lớn nhất.
+ * @brief Tìm và hiển thị tất cả nhân viên văn phòng có độ tuổi lớn nhất.
+ * Xác định nhân viên có năm sinh nhỏ nhất trong danh sách nhân viên văn
+ * phòng, sau đó in ra tất cả nhân viên có cùng năm sinh này.
  * @param Không có.
  * @return Không có.
- * @note Giải thuật:
- *       1. Áp dụng kỹ thuật lính canh dựa trên mốc lịch pháp: Người có tuổi lớn nhất sẽ có năm sinh nhỏ nhất trong hệ thống.
- *       2. Truy xuất năm sinh của nhân viên văn phòng đầu tiên thông qua lệnh liên kết dữ liệu chuỗi `GetNgaySinh().getNam()` để làm mốc chuẩn (namSinhMin).
- *       3. Duyệt mảng so sánh; nếu phát hiện nhân viên có năm sinh nhỏ hơn mốc chuẩn, cập nhật lại giá trị lính canh và trỏ biến nvGiaNhat về thực thể đó.
+ * @note Giải thuật: Duyệt danh sách nhân viên văn phòng để xác định năm sinh
+ *       nhỏ nhất, rồi duyệt lại để hiển thị tất cả nhân viên có năm sinh bằng
+ *       năm sinh nhỏ nhất đó.
  */
 void CCongTy::TimNVVPTuoiCaoNhat()
 {
@@ -208,6 +231,25 @@ void CCongTy::TimNVVPTuoiCaoNhat()
         }
     }
 
+    int count = 0;
+    for (int i = 1; i < SoLuongVP; i++)
+    {
+        int namSinhCur = DanhSachVP[i]->GetNgaySinh().getNam();
+        if (namSinhCur == namSinhMin)
+        {
+            count++;
+        }
+    }
     cout << "\n--Nhan vien van phong co tuoi cao nhat la--\n";
-    nvGiaNhat->Xuat();
+    for (int i = 0; i < SoLuongVP; i++)
+    {
+        if (DanhSachVP[i]->getNgaySinh().getNam() == namSinhMin)
+        {
+            DanhSachVP[i]->Xuat();
+            if (i < count - 1)
+            {
+                cout << "---------------------------------------------\n";
+            }
+        }
+    }
 }
