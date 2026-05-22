@@ -26,7 +26,7 @@ double KiemTraDauVaoChoDouble()
     double giaTri;
     while (true)
     {
-        if (cin >> giaTri && giaTri)
+        if (cin >> giaTri && giaTri >= 0)
         {
             bool chuoiHopLe = true;
             char c;
