@@ -8,8 +8,8 @@ private:
     int nam;
 
 public:
-    cNgay();
     void Nhap();
     void Xuat();
+    int getThang();
     int getNam();
 };

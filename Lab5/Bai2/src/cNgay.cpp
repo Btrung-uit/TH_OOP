@@ -76,17 +76,6 @@ bool KiemTraNgayThangNamHopLe(int ngay, int thang, int nam)
 }
 
 /**
- * @brief Hàm khởi tạo mặc định cho lớp cNgay.
- * @note Giải thuật: Thiết lập ngày mặc định là 01/01/2000.
- */
-cNgay::cNgay()
-{
-    ngay = 1;
-    thang = 1;
-    nam = 2000;
-}
-
-/**
  * @brief Nhập dữ liệu cho đối tượng ngày và kiểm tra tính hợp lệ.
  * @note Giải thuật: Gọi hàm NhapNgayThangNam để lấy dữ liệu, sau đó sử dụng
  *       KiemTraNgayThangNamHopLe để bắt người dùng nhập lại cho đến khi đúng.
@@ -112,6 +101,15 @@ void cNgay::Xuat()
     cout << right << setfill('0') << setw(2) << ngay << "/"
          << setw(2) << thang << "/"
          << left << setfill(' ') << nam;
+}
+
+/**
+ * @brief Lấy giá trị tháng của đối tượng.
+ * @return Giá trị tháng (int).
+ */
+int cNgay::getThang()
+{
+    return thang;
 }
 
 /**
