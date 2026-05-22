@@ -44,12 +44,33 @@ bool KiemTraTen(string &ten)
     return true;
 }
 
+/**
+ * @brief Hàm khởi tạo mặc định cho lớp Nhân viên (lớp cha).
+ * @param Không có.
+ * @return Không có.
+ */
 CNhanVien::CNhanVien()
 {
     HoTen = "";
     luong = 0;
 }
+
+/**
+ * @brief Hàm hủy đối tượng Nhân viên.
+ * @param Không có.
+ * @return Không có.
+ */
 CNhanVien::~CNhanVien() {}
+
+/**
+ * @brief Nhập thông tin cơ bản cho một nhân viên.
+ * @param Không có.
+ * @return Không có.
+ * @note Giải thuật:
+ *       1. Sử dụng getline(cin >> ws, HoTen) để đọc chuỗi họ tên từ bàn phím, kết hợp bộ điều phối `ws` để xóa các khoảng trắng thừa còn sót lại ở đầu dòng nhập.
+ *       2. Gọi hàm KiemTraTen() trong vòng lặp while để kiểm tra định dạng họ tên, ép người dùng nhập lại đến khi hợp lệ.
+ *       3. Gọi phương thức Nhap() của thuộc tính NgaySinh (đối tượng lớp cNgay) để cấu hình mốc ngày sinh.
+ */
 void CNhanVien::Nhap()
 {
     cout << "Nhap Ho ten (toi da 26 ki tu): ";
@@ -63,11 +84,24 @@ void CNhanVien::Nhap()
     cout << "Nhap ngay sinh:\n";
     NgaySinh.Nhap();
 }
+
+/**
+ * @brief Xuất thông tin nền tảng của nhân viên ra màn hình.
+ * @param Không có.
+ * @return Không có.
+ * @note Giải thuật: In chuỗi họ tên của nhân viên, sau đó gọi phương thức Xuat() nội tại của đối tượng NgaySinh để hiển thị ngày tháng năm theo đúng định dạng lịch pháp.
+ */
 void CNhanVien::Xuat()
 {
     cout << "Ho ten: " << HoTen << ", Ngay sinh: ";
     NgaySinh.Xuat();
 }
+
+/**
+ * @brief Lấy thông tin ngày sinh của nhân viên.
+ * @param Không có.
+ * @return Đối tượng kiểu cNgay chứa dữ liệu ngày sinh của nhân viên.
+ */
 cNgay CNhanVien::getNgaySinh() const
 {
     return NgaySinh;
