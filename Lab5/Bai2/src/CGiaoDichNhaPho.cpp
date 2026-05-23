@@ -1,6 +1,6 @@
-#include "CGiaoDichNhaPho.h"
-#include "CGiaoDich.h"
-#include "CTienIch.h"
+#include "../include/CGiaoDichNhaPho.h"
+#include "../include/CGiaoDich.h"
+#include "../include/CTienIch.h"
 #include <iostream>
 using namespace std;
 
@@ -45,8 +45,8 @@ void CGiaoDichNhaPho::TinhThanhTien()
 void CGiaoDichNhaPho::Xuat()
 {
     CGiaoDich::Xuat();
-    cout << ", Loai nha: " << LoaiNha 
-         << ", Dia chi: " << DiaChi 
-         << ", Thanh Tien: " << ThanhTien 
+    cout << "\nLoai nha: " << LoaiNha
+         << ", Dia chi: " << DiaChi
+         << "\nThanh tien: " << DinhDangTien(ThanhTien)
          << " VND\n";
 }

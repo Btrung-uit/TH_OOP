@@ -1,6 +1,6 @@
-#include "CGiaoDichCanHo.h"
-#include "CGiaoDich.h"
-#include "CTienIch.h"
+#include "../include/CGiaoDichCanHo.h"
+#include "../include/CGiaoDich.h"
+#include "../include/CTienIch.h"
 #include <iostream>
 using namespace std;
 
@@ -17,7 +17,7 @@ void CGiaoDichCanHo::Nhap()
         {
             break;
         }
-        cout << "So tang khong hop le!\Vui long long nhap lai (> 0): ";
+        cout << "So tang khong hop le!\nVui long long nhap lai (> 0): ";
     }
 }
 
@@ -40,8 +40,8 @@ void CGiaoDichCanHo::TinhThanhTien()
 void CGiaoDichCanHo::Xuat()
 {
     CGiaoDich::Xuat();
-    cout << ", Ma can ho: " << MaCan 
-         << " , Vi tri tang: " << ViTriTang 
-         << " , Thanh tien: " << ThanhTien 
+    cout << "\nMa can ho: " << MaCan
+         << ", Vi tri tang: " << ViTriTang
+         << "\nThanh tien: " << DinhDangTien(ThanhTien)
          << " VND\n";
 }

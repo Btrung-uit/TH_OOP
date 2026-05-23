@@ -1,4 +1,5 @@
 #include "../include/CGiaoDichDat.h"
+#include "../include/CTienIch.h"
 #include <iostream>
 #include <cctype>
 using namespace std;
@@ -6,11 +7,11 @@ using namespace std;
 void CGiaoDichDat::Nhap()
 {
     CGiaoDich::Nhap();
-    cout << "Nhap loai dat: ";
-    while(cin >> LoaiDat)
+    cout << "Nhap loai dat (A, B, C): ";
+    while (cin >> LoaiDat)
     {
         LoaiDat = toupper(LoaiDat);
-        if(LoaiDat == 'A' || LoaiDat == 'B' || LoaiDat == 'C')
+        if (LoaiDat == 'A' || LoaiDat == 'B' || LoaiDat == 'C')
         {
             break;
         }
@@ -22,7 +23,7 @@ void CGiaoDichDat::Nhap()
 
 void CGiaoDichDat::TinhThanhTien()
 {
-    if(LoaiDat == 'A')
+    if (LoaiDat == 'A')
     {
         ThanhTien = DienTich * DonGia * 1.5;
     }
@@ -35,7 +36,7 @@ void CGiaoDichDat::TinhThanhTien()
 void CGiaoDichDat::Xuat()
 {
     CGiaoDich::Xuat();
-    cout << ", Loai dat: " << LoaiDat 
-         << ", Thanh Tien: " << ThanhTien 
+    cout << "\nLoai dat: " << LoaiDat
+         << ", Thanh tien: " << DinhDangTien(ThanhTien)
          << " VND\n";
 }

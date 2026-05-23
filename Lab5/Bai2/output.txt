@@ -1,0 +1,50 @@
+Nhap so luong giao dich: --Tien hanh giao dich---
+Cac lua chon giao dich:
+1: Giao dich Dat
+2: Giao dich Nha pho
+3: Giao dich can ho chung cu
+---Giao dich thu 1---
+Nhap lua chon: Nhap ma giao dich: Nhap ngay giao dich:
+Nhap ngay: Nhap thang: Nhap nam: Nhap don gia (VND): Nhap dien tich (m^2): Nhap loai nha:
+1: Cao cap
+2: Thuong
+Vui long nhap 1 hoac 2: Nhap dia chi: ---Giao dich thu 2---
+Nhap lua chon: Nhap ma giao dich: Nhap ngay giao dich:
+Nhap ngay: Nhap thang: Nhap nam: Nhap don gia (VND): Nhap dien tich (m^2): Nhap loai nha:
+1: Cao cap
+2: Thuong
+Vui long nhap 1 hoac 2: Nhap dia chi: 
+---Danh sach giao dich---
+===Giao dich dat===
+===Giao dich nha pho===
+Ma giao dich: 1, Ngay giao dich: 01/01/1
+Don gia: 1 VND/m^2, Dien tich: 1 m^2
+Loai nha: Cao cap, Dia chi: 1
+Thanh tien: 1 VND
+Ma giao dich: 1, Ngay giao dich: 01/01/1
+Don gia: 1 VND/m^2, Dien tich: 1 m^2
+Loai nha: Cao cap, Dia chi: 1
+Thanh tien: 1 VND
+===Giao dich can ho===
+
+---Danh sach so luong giao dich---
+So luong giao dich dat: 0
+So luong giao dich nha pho: 2
+So luong giao dich can ho: 0
+
+--Tinh trung binh thanh tien can ho---
+Khong co giao dich can ho!
+
+---Giao dich nha pho co gia tri cao nhat---
+Ma giao dich: 1, Ngay giao dich: 01/01/1
+Don gia: 1 VND/m^2, Dien tich: 1 m^2
+Loai nha: Cao cap, Dia chi: 1
+Thanh tien: 1 VND
+
+Ma giao dich: 1, Ngay giao dich: 01/01/1
+Don gia: 1 VND/m^2, Dien tich: 1 m^2
+Loai nha: Cao cap, Dia chi: 1
+Thanh tien: 1 VND
+
+---Danh sach giao dich Thang 12 Nam 2024---
+Khong co giao dich nao o thang 12 nam 2024

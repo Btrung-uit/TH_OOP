@@ -1,5 +1,6 @@
 #include "../include/CTienIch.h"
 #include <iostream>
+#include <string>
 using namespace std;
 
 /**
@@ -95,4 +96,27 @@ double NhapSoThucAnToan()
         cin.clear();
         cin.ignore(10000, '\n');
     }
+}
+
+/**
+ * @brief Định dạng giá trị tiền thành chuỗi có phân cách hàng nghìn bằng dấu chấm.
+ *
+ * @param tien Giá trị tiền (kiểu double). Phần thập phân (nếu có) sẽ bị loại bỏ trước khi định dạng.
+ * @return Chuỗi chứa giá trị tiền đã được định dạng, ví dụ "1.234.567".
+ * @note Giải thuật:
+ *       1. Ép kiểu `double` sang `long long` để loại bỏ phần thập phân.
+ *       2. Chuyển số nguyên thu được thành `std::string`.
+ *       3. Duyệt chuỗi từ phải sang trái và chèn dấu `'.'` sau mỗi 3 chữ số.
+ *       4. Trả về chuỗi đã định dạng.
+ */
+std::string DinhDangTien(double tien)
+{
+    long long t = (long long)tien;
+    std::string s = std::to_string(t);
+    int n = s.length();
+    for (int i = n - 3; i > 0; i -= 3)
+    {
+        s.insert(i, ".");
+    }
+    return s;
 }

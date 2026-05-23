@@ -20,9 +20,9 @@ void CGiaoDich::Nhap()
     getline(cin >> ws, MaGiaoDich);
     cout << "Nhap ngay giao dich:\n";
     NgayGiaoDich.Nhap();
-    cout << "Nhap don gia: ";
+    cout << "Nhap don gia (VND): ";
     DonGia = NhapSoThucAnToan();
-    cout << "Nhap dien tich: ";
+    cout << "Nhap dien tich (m^2): ";
     DienTich = NhapSoThucAnToan();
 }
 
@@ -30,7 +30,7 @@ void CGiaoDich::Xuat()
 {
     cout << "Ma giao dich: " << MaGiaoDich << ", Ngay giao dich: ";
     NgayGiaoDich.Xuat();
-    cout << ", Don gia: " << DonGia << ", Dien tich: " << DienTich;
+    cout << "\nDon gia: " << DinhDangTien(DonGia) << " VND/m^2, Dien tich: " << DienTich << " m^2";
 }
 
 double CGiaoDich::getThanhTien() const
