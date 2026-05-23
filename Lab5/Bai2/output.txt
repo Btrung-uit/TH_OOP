@@ -5,46 +5,53 @@ Cac lua chon giao dich:
 3: Giao dich can ho chung cu
 ---Giao dich thu 1---
 Nhap lua chon: Nhap ma giao dich: Nhap ngay giao dich:
-Nhap ngay: Nhap thang: Nhap nam: Nhap don gia (VND): Nhap dien tich (m^2): Nhap loai nha:
-1: Cao cap
-2: Thuong
-Vui long nhap 1 hoac 2: Nhap dia chi: ---Giao dich thu 2---
+Nhap ngay: Nhap thang: Nhap nam: Nhap don gia (VND): Nhap dien tich (m^2): Nhap ma can ho: Nhap vi tri tang (So nguyen > 0): ---Giao dich thu 2---
 Nhap lua chon: Nhap ma giao dich: Nhap ngay giao dich:
-Nhap ngay: Nhap thang: Nhap nam: Nhap don gia (VND): Nhap dien tich (m^2): Nhap loai nha:
-1: Cao cap
-2: Thuong
-Vui long nhap 1 hoac 2: Nhap dia chi: 
+Nhap ngay: Nhap thang: Nhap nam: Nhap don gia (VND): Nhap dien tich (m^2): Nhap ma can ho: Nhap vi tri tang (So nguyen > 0): ---Giao dich thu 3---
+Nhap lua chon: Nhap ma giao dich: Nhap ngay giao dich:
+Nhap ngay: Nhap thang: Nhap nam: Nhap don gia (VND): Nhap dien tich (m^2): Nhap ma can ho: Nhap vi tri tang (So nguyen > 0): ---Giao dich thu 4---
+Nhap lua chon: Nhap ma giao dich: Nhap ngay giao dich:
+Nhap ngay: Nhap thang: Nhap nam: Nhap don gia (VND): Nhap dien tich (m^2): Nhap ma can ho: Nhap vi tri tang (So nguyen > 0): 
 ---Danh sach giao dich---
 ===Giao dich dat===
 ===Giao dich nha pho===
-Ma giao dich: 1, Ngay giao dich: 01/01/1
-Don gia: 1 VND/m^2, Dien tich: 1 m^2
-Loai nha: Cao cap, Dia chi: 1
-Thanh tien: 1 VND
-Ma giao dich: 1, Ngay giao dich: 01/01/1
-Don gia: 1 VND/m^2, Dien tich: 1 m^2
-Loai nha: Cao cap, Dia chi: 1
-Thanh tien: 1 VND
 ===Giao dich can ho===
+Ma giao dich: CH-TRUOC, Ngay giao dich: 30/11/2024
+Don gia: 1.000.000.000 VND/m^2, Dien tich: 50 m^2
+Ma can ho: A-30, Vi tri tang: 5
+Thanh tien: 50.000.000.000 VND
+Ma giao dich: CH-DAUTHANG, Ngay giao dich: 01/12/2024
+Don gia: 1.000.000.000 VND/m^2, Dien tich: 50 m^2
+Ma can ho: A-01, Vi tri tang: 5
+Thanh tien: 50.000.000.000 VND
+Ma giao dich: CH-CUOITHANG, Ngay giao dich: 31/12/2024
+Don gia: 1.000.000.000 VND/m^2, Dien tich: 50 m^2
+Ma can ho: A-31, Vi tri tang: 5
+Thanh tien: 50.000.000.000 VND
+Ma giao dich: CH-SAU, Ngay giao dich: 01/01/2025
+Don gia: 1.000.000.000 VND/m^2, Dien tich: 50 m^2
+Ma can ho: A-02, Vi tri tang: 5
+Thanh tien: 50.000.000.000 VND
 
 ---Danh sach so luong giao dich---
 So luong giao dich dat: 0
-So luong giao dich nha pho: 2
-So luong giao dich can ho: 0
+So luong giao dich nha pho: 0
+So luong giao dich can ho: 4
 
 --Tinh trung binh thanh tien can ho---
-Khong co giao dich can ho!
+Trung binh thanh tien can ho la: 50.000.000.000 VND
 
 ---Giao dich nha pho co gia tri cao nhat---
-Ma giao dich: 1, Ngay giao dich: 01/01/1
-Don gia: 1 VND/m^2, Dien tich: 1 m^2
-Loai nha: Cao cap, Dia chi: 1
-Thanh tien: 1 VND
-
-Ma giao dich: 1, Ngay giao dich: 01/01/1
-Don gia: 1 VND/m^2, Dien tich: 1 m^2
-Loai nha: Cao cap, Dia chi: 1
-Thanh tien: 1 VND
+Khong co giao dich nha pho!
 
 ---Danh sach giao dich Thang 12 Nam 2024---
-Khong co giao dich nao o thang 12 nam 2024
+Ma giao dich: CH-DAUTHANG, Ngay giao dich: 01/12/2024
+Don gia: 1.000.000.000 VND/m^2, Dien tich: 50 m^2
+Ma can ho: A-01, Vi tri tang: 5
+Thanh tien: 50.000.000.000 VND
+
+Ma giao dich: CH-CUOITHANG, Ngay giao dich: 31/12/2024
+Don gia: 1.000.000.000 VND/m^2, Dien tich: 50 m^2
+Ma can ho: A-31, Vi tri tang: 5
+Thanh tien: 50.000.000.000 VND
+
