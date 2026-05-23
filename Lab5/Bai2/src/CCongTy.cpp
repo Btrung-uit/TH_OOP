@@ -7,12 +7,26 @@
 #include <iostream>
 using namespace std;
 
+/**
+ * @brief Hàm khởi tạo mặc định cho lớp Công ty.
+ * @param Không có.
+ * @return Không có.
+ */
 CCongTy::CCongTy()
 {
     DanhSachGD = nullptr;
     SoLuongGD = 0;
 }
 
+/**
+ * @brief Hàm hủy đối tượng Công ty để giải phóng hệ thống bộ nhớ động.
+ * @param Không có.
+ * @return Không có.
+ * @note Giải thuật:
+ *       1. Kiểm tra sự tồn tại của mảng con trỏ DanhSachGD.
+ *       2. Duyệt qua từng phần tử để giải phóng bộ nhớ của các đối tượng giao dịch con bằng toán tử `delete`.
+ *       3. Tiến hành giải phóng mảng con trỏ gốc bằng toán tử `delete[]`.
+ */
 CCongTy::~CCongTy()
 {
     if (DanhSachGD)
@@ -25,6 +39,16 @@ CCongTy::~CCongTy()
     }
 }
 
+/**
+ * @brief Cấp phát vùng nhớ, lựa chọn phân loại và nhập danh sách các giao dịch bất động sản.
+ * @param Không có.
+ * @return Không có.
+ * @note Giải thuật:
+ *       1. Nhận số lượng giao dịch thông qua hàm tiện ích NhapSoNguyenAnToan().
+ *       2. Khởi tạo mảng con trỏ lớp cha `CGiaoDich*`.
+ *       3. Chạy vòng lặp duyệt mảng, ép luồng chọn phân loại (1: Đất, 2: Nhà phố, 3: Căn hộ).
+ *       4. Áp dụng cơ chế Đa hình để cấp phát vùng nhớ cho lớp con tương ứng, sau đó gọi phương thức Nhap() và TinhThanhTien() đồng bộ.
+ */
 void CCongTy::NhapDanhSach()
 {
     cout << "Nhap so luong giao dich: ";
@@ -67,6 +91,15 @@ void CCongTy::NhapDanhSach()
     }
 }
 
+/**
+ * @brief Lọc và xuất danh sách giao dịch phân tách theo từng loại bất động sản.
+ * @param Không có.
+ * @return Không có.
+ * @note Giải thuật:
+ *       1. Kiểm tra nếu số lượng bằng 0 thì báo danh sách rỗng và kết thúc.
+ *       2. Sử dụng kỹ thuật RTTI với toán tử `dynamic_cast` để nhận diện chính xác kiểu thực thể lớp con trong mảng con trỏ lớp cha.
+ *       3. Thực hiện 3 vòng lặp tuần tự để xuất riêng nhóm Giao dịch đất, Giao dịch nhà phố và Giao dịch căn hộ.
+ */
 void CCongTy::XuatDanhSach()
 {
     cout << "\n---Danh sach giao dich---\n";
@@ -103,6 +136,12 @@ void CCongTy::XuatDanhSach()
     }
 }
 
+/**
+ * @brief Thống kê tổng số lượng giao dịch đã thực hiện theo từng loại biến thể.
+ * @param Không có.
+ * @return Không có.
+ * @note Giải thuật: Khởi tạo lại biến đếm, sử dụng `dynamic_cast` duyệt qua mảng danh sách để phân loại và cộng dồn số lượng thực thể của riêng từng lớp con (`CGiaoDichDat`, `CGiaoDichNhaPho`, `CGiaoDichCanHo`).
+ */
 void CCongTy::ThongKeSoLuongTungLoai()
 {
     cout << "\n---Danh sach so luong giao dich---\n";
@@ -143,6 +182,15 @@ void CCongTy::ThongKeSoLuongTungLoai()
     cout << count << "\n";
 }
 
+/**
+ * @brief Tính giá trị thành tiền trung bình của tất cả giao dịch thuộc khối căn hộ chung cư.
+ * @param Không có.
+ * @return Giá trị trung bình thành tiền (double), hoặc trả về -1 nếu danh sách không có căn hộ nào.
+ * @note Giải thuật:
+ *       1. Duyệt mảng danh sách, dùng `dynamic_cast` lọc ra các đối tượng thuộc lớp `CGiaoDichCanHo`.
+ *       2. Cộng dồn tiền qua hàm getThanhTien() vào biến sum và tăng biến đếm count.
+ *       3. Trả về kết quả thương số của phép chia `sum / count` nếu tìm thấy căn hộ.
+ */
 double CCongTy::TinhTrungBinhThanhTienCuaCanHo()
 {
     cout << "\n--Tinh trung binh thanh tien can ho---\n";
@@ -166,6 +214,15 @@ double CCongTy::TinhTrungBinhThanhTienCuaCanHo()
     }
 }
 
+/**
+ * @brief Tìm kiếm và hiển thị danh sách các giao dịch nhà phố có giá trị thành tiền cao nhất.
+ * @param Không có.
+ * @return Không có.
+ * @note Giải thuật:
+ *       1. Áp dụng kỹ thuật lính canh: Duyệt mảng tìm thực thể `CGiaoDichNhaPho` đầu tiên làm mốc giá trị cao nhất.
+ *       2. Quét toàn bộ danh sách để cập nhật lại mốc giá trị cao nhất nếu phát hiện giao dịch nhà phố có thành tiền lớn hơn.
+ *       3. Chạy vòng lặp cuối cùng để in toàn bộ các giao dịch nhà phố có giá trị bằng mốc cực đại (để tránh bỏ sót trường hợp đồng giải nhất).
+ */
 void CCongTy::NhaPhoGiaTriCaoNhat()
 {
     cout << "\n---Giao dich nha pho co gia tri cao nhat---\n";
@@ -211,6 +268,12 @@ void CCongTy::NhaPhoGiaTriCaoNhat()
     }
 }
 
+/**
+ * @brief Lọc và in ra toàn bộ giao dịch diễn ra trong mốc thời gian cụ thể (Tháng 12 Năm 2024).
+ * @param Không có.
+ * @return Không có.
+ * @note Giải thuật: Duyệt qua mảng con trỏ, liên kết chuỗi dữ liệu truy xuất qua hàm `getNgayGiaoDich().getNam()` và `getThang()` của lớp cha để đối chiếu điều kiện lọc số học, hiển thị thông tin nếu trùng khớp.
+ */
 void CCongTy::XuatDanhSachThang12Nam2024()
 {
     cout << "---Danh sach giao dich Thang 12 Nam 2024---\n";
