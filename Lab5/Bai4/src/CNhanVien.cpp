@@ -20,6 +20,12 @@ CNhanVien::CNhanVien()
 }
 
 /**
+ * @brief Hàm hủy mặc định cho lớp Nhân viên (lớp cha).
+ * @param Không có.
+ * @return Không có.
+ */
+CNhanVien::~CNhanVien() {}
+/**
  * @brief Nhập thông tin nền tảng, định danh cho một nhân viên từ bàn phím.
  * @param Không có.
  * @return Không có.
